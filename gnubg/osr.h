@@ -1,9 +1,6 @@
 // -*- C++ -*-
-#if !defined( BM_H )
-#define BM_H
-
 /*
- * bm.h
+ * osr.h
  *
  * by Joseph Heled <joseph@gnubg.org>, 2000
  *
@@ -22,43 +19,24 @@
  *
  */
 
-#include <vector>
+#if !defined( OSR_H )
+#define OSR_H
 
-struct MoveRecord {
-  unsigned char pos[10];
-
-  int 		move[8];
-  
-  float		probs[5];
-
-  float		matchScore;
-};
-
-#if 0
-// unused code
-enum EvalLevel {
-  PNONE,
-  
-  PALL,
-
-  P33,
-};
-
-extern int
-FindBestMove_1_33(int anMove[8], int nDice0, int nDice1,
-		  int anBoard[2][25], bool direction, EvalLevel l);
+#if defined( __GNUG__ )
+#pragma interface
 #endif
 
-void
-setPlyBounds(uint np, uint nm, uint na, float th);
+#if defined( __cplusplus )
+extern "C" {
+#endif
 
-extern int
-findBestMove(int        anMove[8],
-	     int const  nDice0,
-	     int const  nDice1,
-	     int        anBoard[2][25],
-	     bool const direction,
-	     uint const nPlies,
-	     std::vector<MoveRecord>*	mRecord = 0);
+extern int  osrRepeatable;
+  
+void
+raceProbs(int anBoard[2][25], float ar[5], unsigned int nGames);
+
+#if defined( __cplusplus )
+}
+#endif
 
 #endif
