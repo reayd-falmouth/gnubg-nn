@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: bearoffdb.c,v 1.3 2004/06/21 03:23:44 joseph Exp $
+ * $Id: bearoffdb.c,v 1.4 2004/06/21 07:17:00 joseph Exp $
  */
 
 #if defined( OS_BEAROFF_DB )
@@ -43,6 +43,12 @@
 #include "positionid.h"
 #include "eval.h"
 #include "bearoffgammon.h"
+
+#ifdef WIN32
+#define BINARY O_BINARY
+#else
+#define BINARY 0
+#endif
 
 static int anCombination[ 33 ][ 18 ];
 static int fCalculated = 0;
@@ -396,7 +402,7 @@ BearoffInit ( const char* szFilename, const int bo ) {
    * Open bearoff file
    */
 
-  if( ( pbc->h = open( szFilename, O_RDONLY ) ) < 0 ) {
+  if( ( pbc->h = open( szFilename, O_RDONLY | BINARY) ) < 0 ) {
   
     // if ( ( pbc->h = PathOpen ( szFilename, szDir, BINARY ) ) < 0 ) {
     /* open failed */
