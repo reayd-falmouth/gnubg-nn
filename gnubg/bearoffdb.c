@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: bearoffdb.c,v 1.4 2004/06/21 07:17:00 joseph Exp $
+ * $Id: bearoffdb.c,v 1.5 2004/12/03 20:07:52 joseph Exp $
  */
 
 #if defined( OS_BEAROFF_DB )
@@ -29,7 +29,11 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
+
+#ifndef WIN32
 #include <sys/mman.h>
+#endif
+
 #include <math.h>
 
 #include <sys/stat.h>
@@ -309,7 +313,11 @@ GetDistUncompressed ( bearoffcontext *pbc, const unsigned int nPosID ) {
 
 }
 
+#ifdef WIN32
+#define HAVE_MMAP 0
+#else
 #define HAVE_MMAP 1
+#endif
 
 static int
 ReadIntoMemory ( bearoffcontext *pbc, const int iOffset, const int nSize ) {
