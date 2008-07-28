@@ -18,8 +18,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: bearoffdb.c,v 1.5 2004/12/03 20:07:52 joseph Exp $
+ * $Id: bearoffdb.c,v 1.6 2005/02/03 16:39:59 oysteijo Exp $
  */
+#if HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #if defined( OS_BEAROFF_DB )
 
