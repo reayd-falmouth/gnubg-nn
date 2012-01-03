@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id:$
+ * $Id: eval.c,v 1.9 2012/01/03 21:15:45 plm Exp $
  */
 
 #if HAVE_CONFIG_H
@@ -677,8 +677,16 @@ SwapSides( int anBoard[2][25] )
 extern void
 RollDice( int anDice[2] )
 {
-  anDice[0] = ( genrand() % 6 ) + 1;
-  anDice[1] = ( genrand() % 6 ) + 1;
+  unsigned long tmprnd;
+  const unsigned long exp232_q = 715827882;
+  const unsigned long exp232_l = 4294967292U;
+
+  while ((tmprnd = genrand()) >= exp232_l)
+    ; /* Try again */
+  anDice[0] = 1 + tmprnd / exp232_q;
+  while ((tmprnd = genrand()) >= exp232_l)
+    ;
+  anDice[1] = 1 + tmprnd / exp232_q;
 }
 
 extern void
