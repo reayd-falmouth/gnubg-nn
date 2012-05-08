@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: bearoffdb.c,v 1.6 2005/02/03 16:39:59 oysteijo Exp $
+ * $Id: bearoffdb.c,v 1.7 2008/07/28 08:02:02 c_anthon Exp $
  */
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -116,7 +116,7 @@ PositionBearoff( int CONST anBoard[], int CONST n )
 
   fBits = 1 << j;
     
-  for( i = 0; i < n; i++ ) {
+  for( i = 0; i < n - 1; i++ ) {
     j -= anBoard[ i ] + 1;
     fBits |= ( 1 << j );
   }
