@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: eval.c,v 1.10 2012/01/03 21:17:29 plm Exp $
+ * $Id: eval.c,v 1.11 2012/01/19 23:42:20 joseph Exp $
  */
 
 #if HAVE_CONFIG_H
@@ -2002,9 +2002,7 @@ EvaluatePosition(CONST int anBoard[2][25], float arOutput[],
 #endif
 }
 
-extern void
-getPBMove(CONST int anBoard[2][25], int race, int bestMove[2][25],
-	  int n0, int n1);
+#include "eggmove.h"
 
 void
 EvaluatePositionPart(CONST int anBoard[2][25], int nPlies, float arOutput[])
