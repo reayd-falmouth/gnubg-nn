@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id:$
+ * $Id: hash.c,v 1.3 2012/01/02 22:32:35 plm Exp $
  */
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -25,6 +25,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "cache.h"
 #include "hash.h"
@@ -441,7 +442,7 @@ CacheResize( cache *pc, int cNew )
 }
 
 void
-CacheStats(cache* pc, int* pcLookup, int* pcHit)
+CacheStats(cache* pc, unsigned int* pcLookup, unsigned int* pcHit)
 {
   if ( pcLookup )
     *pcLookup = pc->cLookup;

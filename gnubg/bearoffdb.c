@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: bearoffdb.c,v 1.7 2008/07/28 08:02:02 c_anthon Exp $
+ * $Id: bearoffdb.c,v 1.8 2012/05/08 16:33:29 plm Exp $
  */
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -298,15 +298,14 @@ GetDistUncompressed ( bearoffcontext *pbc, const unsigned int nPosID ) {
 
   iOffset = 40 + 64 * nPosID * ( pbc->fGammon ? 2 : 1 );
 
-  if ( pbc->fInMemory )
+  if ( pbc->fInMemory ) {
     /* from memory */
-    puch = 
-      ( ( unsigned char *) pbc->p ) + iOffset;
-  else {
+    puch = ( ( unsigned char *) pbc->p ) + iOffset;
+  } else {
     /* from disk */
 
     lseek ( pbc->h, iOffset, SEEK_SET );
-    read ( pbc->h, ac, pbc->fGammon ? 128 : 64 );
+    int const o __attribute__((unused)) = read ( pbc->h, ac, pbc->fGammon ? 128 : 64 );
     puch = ac;
   }
 
@@ -927,10 +926,10 @@ ReadTwoSidedBearoff ( bearoffcontext *pbc,
   if ( ! pc ) {
 
     if ( pbc->fInMemory )
-      pc = ((char *) pbc->p)+ 40 + 2 * iPos * k;
+      pc = (unsigned char*)(((char *) pbc->p)+ 40 + 2 * iPos * k);
     else {
       lseek ( pbc->h, 40 + 2 * iPos * k, SEEK_SET );
-      read ( pbc->h, ac, k * 2 );
+      int const o __attribute__((unused)) = read ( pbc->h, ac, k * 2 );
       pc = ac;
     }
 
