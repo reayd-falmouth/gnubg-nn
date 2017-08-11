@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_REVISION($Revision:$)
+AC_REVISION($Revision: 1.5 $)
 AC_INIT([gnubg-nn], [0.16], [bug-gnubg@gnu.org])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([py/pygnubg.cc])
@@ -36,6 +36,9 @@ AC_FUNC_REALLOC
 AC_FUNC_STRTOD
 AC_CHECK_FUNCS([memmove memset pow sqrt strcasecmp strchr strdup strncasecmp])
 
+AC_SEARCH_LIBS([dlopen], [dl dld], [], [
+  AC_MSG_ERROR([unable to find the dlopen() function])
+])
 
 dnl
 dnl SSE
