@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_REVISION($Revision: 1.5 $)
+AC_REVISION($Revision: 1.6 $)
 AC_INIT([gnubg-nn], [0.16], [bug-gnubg@gnu.org])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([py/pygnubg.cc])
@@ -91,12 +91,12 @@ AC_ARG_VAR(SSE_CFLAGS, [CFLAGS needed for compiling in sse cpu support])
    
 dnl
 
-AZ_PYTHON_DEFAULT()
-AZ_PYTHON_WITH()
-AZ_PYTHON_VERSION_ENSURE([2.2])
-AZ_PYTHON_CSPEC
-AZ_PYTHON_LSPEC
-if test "x$az_python_cspec" == "x"; then
+AX_PYTHON_DEFAULT()
+AX_PYTHON_WITH()
+AX_PYTHON_VERSION_ENSURE([2.2])
+AX_PYTHON_CSPEC
+AX_PYTHON_LSPEC
+if test "x$ax_python_cspec" == "x"; then
 	AC_MSG_ERROR("Needs python devel");
 fi
 
