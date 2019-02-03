@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_REVISION($Revision: 1.6 $)
+AC_REVISION($Revision: 1.7 $)
 AC_INIT([gnubg-nn], [0.16], [bug-gnubg@gnu.org])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([py/pygnubg.cc])
@@ -97,7 +97,7 @@ AX_PYTHON_VERSION_ENSURE([2.2])
 AX_PYTHON_CSPEC
 AX_PYTHON_LSPEC
 if test "x$ax_python_cspec" == "x"; then
-	AC_MSG_ERROR("Needs python devel");
+	AC_MSG_ERROR("Needs python devel. Did you use either --with-python or --with-python=python2 ?");
 fi
 
 AC_DEFINE(OS_BEAROFF_DB, 1, [osbdb])
