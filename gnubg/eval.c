@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: eval.c,v 1.14 2013/08/20 20:32:30 plm Exp $
+ * $Id: eval.c,v 1.15 2017/12/02 22:32:16 plm Exp $
  */
 
 #if HAVE_CONFIG_H
@@ -323,7 +323,7 @@ LoadNet(CONST char* szWeights, long cSize)
   if( !( pfWeights = fopen( szWeights, "r" ) ) ) {
     return NULL;
   }
-    
+
   if( fscanf( pfWeights, "GNU Backgammon %15s\n", szFileVersion ) != 1 ||
       strncmp( szFileVersion, VERSION, strlen(VERSION) ) != 0 ) {
     fprintf(stderr, "expecting version %s, file %s", VERSION, szFileVersion);
@@ -1566,7 +1566,10 @@ pubEvalVal(int race, int b[2][25])
       anPubeval[27] += nc;
     }
   }
-    
+  
+  anPubeval[26] -= b1[24];
+  anPubeval[27] += b0[24];
+
   anPubeval[0] = -b0[24];
   anPubeval[25] = b1[24];
 
