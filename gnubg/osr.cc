@@ -589,9 +589,6 @@ osp(int anBoard[25], uint const nGames, uint oboard[24],
   return tot;
 }
 
-extern "C" float
-raceBGprob(int anBoard[2][25], int side);
-
 extern "C"
 void
 raceProbs(int anBoard[2][25], float ar[5], uint nGames)

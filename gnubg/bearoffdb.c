@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: bearoffdb.c,v 1.8 2012/05/08 16:33:29 plm Exp $
+ * $Id: bearoffdb.c,v 1.9 2012/07/05 00:34:41 joseph Exp $
  */
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -794,10 +794,6 @@ isBearoff ( bearoffcontext *pbc, CONST int anBoard[2][25] ) {
 
 }
 
-
-extern void
-setGammonProb(CONST int anBoard[2][25], int bp0, int bp1, float* g0,
-	      float* g1);
 
 static int
 BearoffEvalOneSided ( bearoffcontext *pbc, 

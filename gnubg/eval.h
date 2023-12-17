@@ -245,6 +245,12 @@ inputNameByClass(positionclass pc, unsigned int k);
 extern CONST char*
 inputNameByFunc(CONST char* inpFunc, unsigned int k);
 
+extern void
+setGammonProb(CONST int anBoard[2][25], int bp0, int bp1, float* g0, float* g1);
+
+extern float
+raceBGprob(CONST int anBoard[2][25], unsigned int side);
+
 #include "lib/sse.h"
 
 #endif
