@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: eval.c,v 1.15 2017/12/02 22:32:16 plm Exp $
+ * $Id: eval.c,v 1.16 2019/02/03 14:50:29 plm Exp $
  */
 
 #if HAVE_CONFIG_H
@@ -51,10 +51,10 @@
 
 
 #undef VERSION
-#define VERSION "1.00"
+#define VERSION "1.01"
 
 char* weightsVersion = VERSION;
-char* compatibleVersions[] = {"0.91", "0.17", NULL};
+char* compatibleVersions[] = {NULL};
 
 #include "osr.h"
 #include "br.h"

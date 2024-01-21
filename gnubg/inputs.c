@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id:$
+ * $Id: inputs.c,v 1.7 2018/12/12 19:25:53 plm Exp $
  */
 
 #if HAVE_CONFIG_H
@@ -338,16 +338,12 @@ static void
 CalculateContactInputs(CONST int anBoard[2][25], float inputs[]);
 static void
 CalculateContactInputsE1(CONST int anBoard[2][25], float arInput[]);
-void 
-CalculateBearoffInputs(CONST int anBoard[2][25], float inputs[]);
 static void 
 CalculateRaceBaseInputs(CONST int anBoard[2][25], float inputs[]);
 static void 
 CalculateRaceNewInputs(CONST int anBoard[2][25], float inputs[]);
 static void 
 CalculateRaceInputsOld(CONST int anBoard[2][25], float inputs[]);
-void 
-baseInputs(CONST int anBoard[2][25], float inputs[]);
 static void 
 baseInputs250(CONST int anBoard[2][25], float inputs[]);
 static void 
@@ -642,7 +638,7 @@ pipLossP1P2(CONST int* anBoard, CONST int* anBoardOpp,
     
   nBoard = 0;
   for(i = 0; i < 6; ++i) {
-    if( anBoard[i] ) {
+    if( anBoard[i] >= 2) {
       nBoard++;
     }
   }
