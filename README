@@ -1,0 +1,6 @@
+The gnubg-nn tools use python2. Specifying it at configure stage with
+--with-python=python2 or --with-python=python2.7 will usually be needed.
+
+The C++ sources are not compatible with versions of the language more
+recent than C++ 14. With recent compilers, adding -std=c++14 to CXXFLAGS
+in the configure command may be needed.
