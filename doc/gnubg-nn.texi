@@ -96,7 +96,7 @@ To run, @gnubg{} needs to read in the NN's from an external file.
 
 Please note that gnubg-nn NN file format is different than @gnubg{}.
 Grab the latest net from
-@uref{http://files.gnubg.org/media/nn-training/current/nets/nngnubg.weights.bz2}.
+@uref{https://alpha.gnu.org/gnu/gnubg/nn-training/1.01/nets/nngnubg.weights.bz2}.
 After unzipping, you might want to rename it gnubg.weights.
 
 @section How to specify which net to use in run time
@@ -135,7 +135,7 @@ except some race cases where we are fortunate to have a one sided database to
 compare against).
 
 You can find the current benchmark files
-@uref{ftp://ftp.demon.nl/pub/games/gnubg/nn-training/benchmarks,here}.
+@uref{https://alpha.gnu.org/gnu/gnubg/nn-training/1.00/,here}.
 
 To see how well a specific net does, run:
 
