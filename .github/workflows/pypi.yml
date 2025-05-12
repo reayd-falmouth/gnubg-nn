@@ -59,7 +59,7 @@ jobs:
       - name: Run autogen and configure
         run: |
           ./autogen.sh  # or autoreconf -fvi
-          ./configure   # Configure the build system
+          ./configure --with-python=python2  # Configure the build system
           make
       - name: Build the wheel
         run: |
