@@ -1,0 +1,222 @@
+.
+├── AUTHORS
+├── COPYING
+├── ChangeLog
+├── INSTALL
+├── Makefile
+├── Makefile.am
+├── Makefile.in
+├── Makefile_linux
+├── NEWS
+├── README
+├── aclocal.m4
+├── analyze
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── analyze.cc
+│   ├── analyze.h
+│   ├── analyze.lo
+│   ├── analyze.o
+│   ├── bgdefs.h
+│   ├── bm.cc
+│   ├── bm.h
+│   ├── bm.lo
+│   ├── bm.o
+│   ├── bms.cc
+│   ├── bms.h
+│   ├── bms.lo
+│   ├── bms.o
+│   ├── danalyze.cc
+│   ├── danalyze.h
+│   ├── danalyze.lo
+│   ├── danalyze.o
+│   ├── defs.h
+│   ├── dice_gen.cc
+│   ├── dice_gen.h
+│   ├── dice_gen.lo
+│   ├── dice_gen.o
+│   ├── equities.cc
+│   ├── equities.h
+│   ├── equities.lo
+│   ├── equities.o
+│   ├── libanalyze.la
+│   ├── mec.cc
+│   ├── mec.h
+│   ├── mec.lo
+│   ├── mec.o
+│   ├── minmax.h
+│   ├── misc.h
+│   ├── player.cc
+│   ├── player.h
+│   ├── player.lo
+│   └── player.o
+├── autogen.sh
+├── autom4te.cache
+│   ├── output.0
+│   ├── output.1
+│   ├── output.2
+│   ├── output.3
+│   ├── requests
+│   ├── traces.0
+│   ├── traces.1
+│   ├── traces.2
+│   └── traces.3
+├── build
+│   └── temp.linux-x86_64-cpython-310
+├── compile
+├── config.guess
+├── config.h
+├── config.h.in
+├── config.h.in~
+├── config.log
+├── config.status
+├── config.sub
+├── configure
+├── configure.ac
+├── configure~
+├── depcomp
+├── doc
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── gnubg-nn.info
+│   ├── gnubg-nn.texi
+│   ├── mdate-sh
+│   ├── stamp-vti
+│   ├── texinfo.tex
+│   └── version.texi
+├── find_best_move.py
+├── gnubg
+│   ├── ChangeLog
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── bearoffdb.c
+│   ├── bearoffdb.h
+│   ├── bearoffdb.o
+│   ├── bearoffgammon.cc
+│   ├── bearoffgammon.h
+│   ├── bearoffgammon.o
+│   ├── br.h
+│   ├── eggmove.h
+│   ├── eggmoveg.c
+│   ├── eggmoveg.o
+│   ├── eval.c
+│   ├── eval.h
+│   ├── eval.o
+│   ├── inputs.c
+│   ├── inputs.h
+│   ├── inputs.o
+│   ├── lib
+│   │   ├── Makefile
+│   │   ├── Makefile.am
+│   │   ├── Makefile.in
+│   │   ├── cache.h
+│   │   ├── hash.c
+│   │   ├── hash.h
+│   │   ├── hash.o
+│   │   ├── neuralnet.c
+│   │   ├── neuralnet.h
+│   │   ├── neuralnet.o
+│   │   ├── nsse.c
+│   │   ├── nsse.o
+│   │   ├── sigmoid.h
+│   │   └── sse.h
+│   ├── makebear.cc
+│   ├── makegm.cc
+│   ├── mt19937int.c
+│   ├── mt19937int.h
+│   ├── mt19937int.o
+│   ├── osr.cc
+│   ├── osr.h
+│   ├── osr.o
+│   ├── positionid.c
+│   ├── positionid.h
+│   ├── positionid.o
+│   ├── pub_eval.c
+│   ├── pub_eval.o
+│   ├── racebg.cc
+│   ├── racebg.h
+│   └── racebg.o
+├── gnubg.weights
+├── gnubg_api.cc
+├── gnubg_api.o
+├── gnubg_os.db
+├── gnubg_os0.bd
+├── gnubg_ts0.bd
+├── gnubgmodule.cpp
+├── gnubgmodule.h
+├── install-sh
+├── libgnubg_nn.so
+├── libtool
+├── ltmain.sh
+├── m4
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── ax_python_embed.m4
+│   ├── libtool.m4
+│   ├── ltoptions.m4
+│   ├── ltsugar.m4
+│   ├── ltversion.m4
+│   └── lt~obsolete.m4
+├── missing
+├── output.funcs
+├── output.tree
+├── poetry.lock
+├── py
+│   ├── ChangeLog
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── bgutil.py
+│   ├── bgutil.pyc
+│   ├── bgutil1.py
+│   ├── bgutil1.pyc
+│   ├── cor.py
+│   ├── pygnubg
+│   ├── pygnubg.cc
+│   ├── pygnubg.h
+│   ├── pynets.cc
+│   ├── pynets.h
+│   ├── pytrainer.cc
+│   ├── pytrainer.h
+│   ├── raceinfo.cc
+│   ├── raceinfo.h
+│   ├── raceinfo.o
+│   └── stdutil.h
+├── pyproject.toml
+├── sa
+│   ├── GetOpt.cc
+│   ├── GetOpt.h
+│   ├── GetOpt.o
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── main.cc
+│   ├── main.o
+│   └── sagnubg
+├── scripts
+│   ├── Makefile
+│   ├── Makefile.am
+│   ├── Makefile.in
+│   ├── benchmark
+│   │   ├── combineBM.py
+│   │   └── perr.py
+│   ├── play
+│   │   ├── matchplay.py
+│   │   ├── playit.py
+│   │   ├── playpub.py
+│   │   └── sandbox.py
+│   └── train
+│       ├── buildnet.py
+│       ├── getth.py
+│       ├── referr.py
+│       └── train.py
+├── setup.py
+├── stamp-h1
+├── test_eval.py
+└── test_linux.py
+
+14 directories, 205 files

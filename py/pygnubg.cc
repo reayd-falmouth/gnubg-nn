@@ -227,7 +227,7 @@ enum {
   PLY_BEAROFF = -3,
   PLY_PRUNE = -4,
   PLY_1SBEAR = -5,
-  PLY_RACENET = -6,
+  PLY_RACENET = -6
   PLY_1ANDHALF = -7,
   PLY_1SRACE = -8,
 };

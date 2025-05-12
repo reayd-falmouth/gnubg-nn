@@ -1,0 +1,51 @@
+# --- Include and define flags ---
+INCLUDE_DIRS := -I. -Ignubg -Ignubg/lib -Ianalyze
+DEFINES := -DHAVE_CONFIG_H -DLOADED_BO -DOS_BEAROFF_DB
+
+# Compiler flags
+CXXFLAGS := -fPIC -O2 -std=c++11 $(INCLUDE_DIRS) $(DEFINES)
+CFLAGS   := -fPIC -O2 $(INCLUDE_DIRS) $(DEFINES)
+
+# --- Source file discovery ---
+# All .c files
+C_SRCS := $(shell find . -name '*.c')
+
+# All .cc files, excluding specific files and directories
+RAW_CPP_SRCS := $(shell find . -name '*.cc')
+EXCLUDED_CPP := ./gnubg/makegm.cc ./gnubg/makebear.cc
+EXCLUDED_DIR := ./py/
+
+# Filter out excluded .cc files and anything under ./py/
+CPP_SRCS := $(filter-out $(EXCLUDED_CPP), $(RAW_CPP_SRCS))
+CPP_SRCS := $(filter-out $(filter $(EXCLUDED_DIR)%,$(CPP_SRCS)), $(CPP_SRCS))
+
+# Manually include the main API wrapper
+SRCS := $(C_SRCS) $(CPP_SRCS)
+
+# Convert to object files
+OBJS := $(SRCS:.cc=.o)
+OBJS := $(OBJS:.c=.o)
+
+# --- Targets ---
+
+# Shared library target
+libgnubg_nn.so: $(OBJS)
+	$(CXX) -shared -o $@ $(OBJS) -ldl -lm
+
+# Compile rules
+%.o: %.cc
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+# Clean up
+clean:
+	rm -f $(OBJS) libgnubg_nn.so
+
+
+python3:
+	rm -rf build/ gnubg.cpython-310-*.so
+	rm -rf build/ gnubg.cpython-*.so
+	poetry run python setup.py clean --all
+	poetry run python setup.py build_ext --inplace

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "gnubg"
+version = "0.1.0"
+description = "Python bindings for GNUBG neural evaluation"
+authors = ["Your Name <you@example.com>"]
+packages = []
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+
+[tool.poetry.group.dev.dependencies]
+setuptools = "^80.4.0"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
