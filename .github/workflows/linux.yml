@@ -18,7 +18,6 @@ jobs:
       - name: Set up Python 2 and Python 3
         run: |
           sudo apt-get update
-          sudo apt-get install -y python2 python2-dev python3 python3-dev
           # Install necessary build dependencies
           sudo apt-get install -y autoconf automake libtool gcc g++ make
       - name: Install Python dependencies
