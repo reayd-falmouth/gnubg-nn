@@ -6,3 +6,7 @@ pygnubg
 Makefile
 Makefile.in
 build/
+gnubg/
+gnubg.egg-info
+dist/
+analyze/

@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "gnubg"
-version = "0.1.0"
+version = "1.01"
 description = "Python bindings for GNUBG neural evaluation"
-authors = ["Your Name <you@example.com>"]
+authors = ["David Reay <dr323090@falmouth.ac.uk>"]
 packages = []
 
 [tool.poetry.dependencies]

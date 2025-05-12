@@ -27,10 +27,13 @@ gnubg_module = Extension(
 # Setup declaration
 setup(
     name="gnubg",
-    version="0.1.0",
+    version="1.01",
     ext_modules=[gnubg_module],
     package_data={
         '': ['data/*.bd', 'data/*.weights', 'data/*.db']
     },
     include_package_data=True,
+    description='Python bindings for GNUBG neural evaluation',
+    author='David Reay',
+    author_email='dr323090@falmouth.ac.uk',
 )
