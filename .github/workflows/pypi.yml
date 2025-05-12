@@ -23,15 +23,23 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install wheel setuptools twine
-      - name: Build wheel
+          # Install necessary dependencies for building (autotools, gcc, etc.)
+          sudo apt-get update
+          sudo apt-get install -y autoconf automake libtool gcc g++ make
+      - name: Run autogen and configure
+        run: |
+          ./autogen.sh  # or autoreconf -fvi
+          ./configure   # Configure the build system
+      - name: Build the wheel
         run: |
           cd py
-          python setup.py bdist_wheel
-#      - name: Upload wheel to GitHub release
-#        run: |
-#          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-#          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.tar.gz | tar xz
-#          ./gh_*/bin/gh release create v${{ github.run_number }} dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
+          make           # Build the extension
+          python setup.py bdist_wheel  # Build the wheel
+      - name: Upload wheel to GitHub release
+        run: |
+          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.tar.gz | tar xz
+          ./gh_*/bin/gh release create v${{ github.run_number }} py/dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
 
   build-macos:
     runs-on: macos-latest
@@ -46,15 +54,22 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install wheel setuptools twine
-      - name: Build wheel
+          # Install necessary dependencies for building (autotools, gcc, etc.)
+          brew install autoconf automake libtool gcc make
+      - name: Run autogen and configure
+        run: |
+          ./autogen.sh  # or autoreconf -fvi
+          ./configure   # Configure the build system
+          make
+      - name: Build the wheel
         run: |
           cd py
-          python setup.py bdist_wheel
-#      - name: Upload wheel to GitHub release
-#        run: |
-#          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-#          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_macOS_amd64.tar.gz | tar xz
-#          ./gh_*/bin/gh release create v${{ github.run_number }} dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
+          python setup.py bdist_wheel  # Build the wheel
+      - name: Upload wheel to GitHub release
+        run: |
+          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_macOS_amd64.tar.gz | tar xz
+          ./gh_*/bin/gh release create v${{ github.run_number }} py/dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
 
   build-windows:
     runs-on: windows-latest
@@ -69,22 +84,28 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install wheel setuptools twine
-      - name: Build wheel
+          # Install necessary dependencies for building (autotools, gcc, etc.)
+          choco install autoconf automake libtool make
+      - name: Run autogen and configure
+        run: |
+          ./autogen.sh  # or autoreconf -fvi
+          ./configure   # Configure the build system
+          make
+      - name: Build the wheel
         run: |
           cd py
-          python setup.py bdist_wheel
-#      - name: Upload wheel to GitHub release
-#        run: |
-#          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-#          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_windows_amd64.tar.gz | tar xz
-#          ./gh_*/bin/gh release create v${{ github.run_number }} dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
+          python setup.py bdist_wheel  # Build the wheel
+      - name: Upload wheel to GitHub release
+        run: |
+          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_windows_amd64.tar.gz | tar xz
+          ./gh_*/bin/gh release create v${{ github.run_number }} py/dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
 
-#  upload-to-pypi:
-#    runs-on: ubuntu-latest
-#    needs: [build-linux, build-macos, build-windows]  # Make sure wheels are built first
-#    steps:
-#      - name: Upload to PyPI (Test PyPI)
-#        run: |
-#          python -m pip install --upgrade twine
-#          twine upload --repository testpypi dist/*  # You can replace testpypi with pypi for production
-#
+  upload-to-pypi:
+    runs-on: ubuntu-latest
+    needs: [build-linux, build-macos, build-windows]  # Make sure wheels are built first
+    steps:
+      - name: Upload to PyPI (Test PyPI)
+        run: |
+          python -m pip install --upgrade twine
+          twine upload --repository testpypi py/dist/*  # You can replace testpypi with pypi for production
