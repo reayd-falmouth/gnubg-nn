@@ -49,7 +49,7 @@ import sys
 sys.path.insert(0, ".")
 
 # point GNUBGHOME at your data dir so Analyze::init() can find its files
-os.environ["GNUBGHOME"] = os.path.abspath("gnubg_data")
+os.environ["GNUBGHOME"] = os.path.abspath("data")
 
 faulthandler.enable()
 

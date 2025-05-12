@@ -1770,7 +1770,7 @@ PyInit_gnubg(void)
     Dl_info dl_info;
     dladdr((void*)PyInit_gnubg, &dl_info);
     std::string base = dirname(strdup(dl_info.dli_fname));
-    std::string datadir = base + "/gnubg_data";
+    std::string datadir = base + "/data";
 
     std::string weights = datadir + "/gnubg.weights";
     std::string os_bd   = datadir + "/gnubg_os.db";

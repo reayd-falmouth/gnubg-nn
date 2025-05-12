@@ -5,3 +5,4 @@ pygnubg
 
 Makefile
 Makefile.in
+build/

@@ -18,3 +18,10 @@ AM_CFLAGS = $(SSE_CFLAGS)
 AM_CXXFLAGS = $(SSE_CFLAGS)
 
 EXTRA_DIST = bgutil.py bgutil1.py
+
+# Add your custom python3 build target
+py3mod:
+	rm -rf build/ gnubg.cpython-310-*.so
+	rm -rf build/ gnubg.cpython-*.so
+	poetry run python setup.py clean --all
+	poetry run python setup.py build_ext --inplace
