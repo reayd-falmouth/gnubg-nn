@@ -59,6 +59,425 @@ enum {
     PLY_1SRACE   = -8,
 };
 
+unsigned int const nData = 400;
+
+static float ocrData[nData][2] = {
+        { /*1 , */ 1.0000,0.0000 } ,
+        { /*2 , */ 1.0000,0.0000 } ,
+        { /*3 , */ 1.0000,0.0000 } ,
+        { /*4 , */ 1.0556,0.2291 } ,
+        { /*5 , */ 1.1389,0.3458 } ,
+        { /*6 , */ 1.2500,0.4330 } ,
+        { /*7 , */ 1.3642,0.4876 } ,
+        { /*8 , */ 1.5401,0.5226 } ,
+        { /*9 , */ 1.6983,0.5234 } ,
+        { /*10 , */ 1.8404,0.5097 } ,
+        { /*11 , */ 1.9462,0.5277 } ,
+        { /*12 , */ 2.0718,0.5433 } ,
+        { /*13 , */ 2.1892,0.5794 } ,
+        { /*14 , */ 2.2908,0.6378 } ,
+        { /*15 , */ 2.4052,0.6880 } ,
+        { /*16 , */ 2.5256,0.7294 } ,
+        { /*17 , */ 2.6745,0.7213 } ,
+        { /*18 , */ 2.7905,0.7534 } ,
+        { /*19 , */ 2.9042,0.7878 } ,
+        { /*20 , */ 3.0184,0.8244 } ,
+        { /*21 , */ 3.1588,0.8089 } ,
+        { /*22 , */ 3.2708,0.8484 } ,
+        { /*23 , */ 3.3829,0.8884 } ,
+        { /*24 , */ 3.5021,0.9203 } ,
+        { /*25 , */ 3.6485,0.8860 } ,
+        { /*26 , */ 3.7668,0.9129 } ,
+        { /*27 , */ 3.8828,0.9424 } ,
+        { /*28 , */ 4.0056,0.9610 } ,
+        { /*29 , */ 4.1278,0.9795 } ,
+        { /*30 , */ 4.2492,0.9983 } ,
+        { /*31 , */ 4.3696,1.0191 } ,
+        { /*32 , */ 4.4950,1.0303 } ,
+        { /*33 , */ 4.6199,1.0417 } ,
+        { /*34 , */ 4.7419,1.0577 } ,
+        { /*35 , */ 4.8628,1.0764 } ,
+        { /*36 , */ 4.9854,1.0918 } ,
+        { /*37 , */ 5.1091,1.1044 } ,
+        { /*38 , */ 5.2300,1.1231 } ,
+        { /*39 , */ 5.3517,1.1401 } ,
+        { /*40 , */ 5.4742,1.1555 } ,
+        { /*41 , */ 5.5988,1.1647 } ,
+        { /*42 , */ 5.7207,1.1805 } ,
+        { /*43 , */ 5.8423,1.1966 } ,
+        { /*44 , */ 5.9646,1.2114 } ,
+        { /*45 , */ 6.0881,1.2221 } ,
+        { /*46 , */ 6.2100,1.2374 } ,
+        { /*47 , */ 6.3318,1.2528 } ,
+        { /*48 , */ 6.4544,1.2662 } ,
+        { /*49 , */ 6.5777,1.2772 } ,
+        { /*50 , */ 6.6999,1.2909 } ,
+        { /*51 , */ 6.8220,1.3050 } ,
+        { /*52 , */ 6.9446,1.3175 } ,
+        { /*53 , */ 7.0672,1.3300 } ,
+        { /*54 , */ 7.1895,1.3430 } ,
+        { /*55 , */ 7.3118,1.3561 } ,
+        { /*56 , */ 7.4344,1.3682 } ,
+        { /*57 , */ 7.5570,1.3799 } ,
+        { /*58 , */ 7.6793,1.3924 } ,
+        { /*59 , */ 7.8017,1.4048 } ,
+        { /*60 , */ 7.9242,1.4168 } ,
+        { /*61 , */ 8.0467,1.4283 } ,
+        { /*62 , */ 8.1691,1.4404 } ,
+        { /*63 , */ 8.2915,1.4524 } ,
+        { /*64 , */ 8.4139,1.4640 } ,
+        { /*65 , */ 8.5365,1.4751 } ,
+        { /*66 , */ 8.6589,1.4867 } ,
+        { /*67 , */ 8.7813,1.4982 } ,
+        { /*68 , */ 8.9038,1.5095 } ,
+        { /*69 , */ 9.0263,1.5205 } ,
+        { /*70 , */ 9.1487,1.5317 } ,
+        { /*71 , */ 9.2711,1.5429 } ,
+        { /*72 , */ 9.3936,1.5538 } ,
+        { /*73 , */ 9.5161,1.5645 } ,
+        { /*74 , */ 9.6385,1.5754 } ,
+        { /*75 , */ 9.7609,1.5862 } ,
+        { /*76 , */ 9.8834,1.5968 } ,
+        { /*77 , */ 10.0058,1.6073 } ,
+        { /*78 , */ 10.1283,1.6179 } ,
+        { /*79 , */ 10.2507,1.6284 } ,
+        { /*80 , */ 10.3732,1.6387 } ,
+        { /*81 , */ 10.4956,1.6490 } ,
+        { /*82 , */ 10.6181,1.6593 } ,
+        { /*83 , */ 10.7405,1.6695 } ,
+        { /*84 , */ 10.8630,1.6796 } ,
+        { /*85 , */ 10.9854,1.6896 } ,
+        { /*86 , */ 11.1079,1.6997 } ,
+        { /*87 , */ 11.2303,1.7096 } ,
+        { /*88 , */ 11.3528,1.7195 } ,
+        { /*89 , */ 11.4752,1.7293 } ,
+        { /*90 , */ 11.5977,1.7391 } ,
+        { /*91 , */ 11.7201,1.7488 } ,
+        { /*92 , */ 11.8426,1.7585 } ,
+        { /*93 , */ 11.9650,1.7681 } ,
+        { /*94 , */ 12.0875,1.7777 } ,
+        { /*95 , */ 12.2099,1.7872 } ,
+        { /*96 , */ 12.3324,1.7967 } ,
+        { /*97 , */ 12.4548,1.8061 } ,
+        { /*98 , */ 12.5773,1.8154 } ,
+        { /*99 , */ 12.6997,1.8247 } ,
+        { /*100 , */ 12.8222,1.8340 } ,
+        { /*101 , */ 12.9446,1.8432 } ,
+        { /*102 , */ 13.0671,1.8524 } ,
+        { /*103 , */ 13.1895,1.8616 } ,
+        { /*104 , */ 13.3120,1.8706 } ,
+        { /*105 , */ 13.4344,1.8797 } ,
+        { /*106 , */ 13.5569,1.8887 } ,
+        { /*107 , */ 13.6793,1.8976 } ,
+        { /*108 , */ 13.8018,1.9065 } ,
+        { /*109 , */ 13.9242,1.9154 } ,
+        { /*110 , */ 14.0466,1.9242 } ,
+        { /*111 , */ 14.1691,1.9331 } ,
+        { /*112 , */ 14.2915,1.9418 } ,
+        { /*113 , */ 14.4140,1.9505 } ,
+        { /*114 , */ 14.5364,1.9592 } ,
+        { /*115 , */ 14.6589,1.9678 } ,
+        { /*116 , */ 14.7813,1.9764 } ,
+        { /*117 , */ 14.9038,1.9850 } ,
+        { /*118 , */ 15.0262,1.9935 } ,
+        { /*119 , */ 15.1487,2.0020 } ,
+        { /*120 , */ 15.2711,2.0104 } ,
+        { /*121 , */ 15.3936,2.0189 } ,
+        { /*122 , */ 15.5160,2.0272 } ,
+        { /*123 , */ 15.6385,2.0356 } ,
+        { /*124 , */ 15.7609,2.0439 } ,
+        { /*125 , */ 15.8834,2.0522 } ,
+        { /*126 , */ 16.0058,2.0604 } ,
+        { /*127 , */ 16.1283,2.0686 } ,
+        { /*128 , */ 16.2507,2.0768 } ,
+        { /*129 , */ 16.3732,2.0850 } ,
+        { /*130 , */ 16.4956,2.0931 } ,
+        { /*131 , */ 16.6181,2.1012 } ,
+        { /*132 , */ 16.7405,2.1092 } ,
+        { /*133 , */ 16.8630,2.1173 } ,
+        { /*134 , */ 16.9854,2.1253 } ,
+        { /*135 , */ 17.1079,2.1332 } ,
+        { /*136 , */ 17.2303,2.1411 } ,
+        { /*137 , */ 17.3528,2.1490 } ,
+        { /*138 , */ 17.4752,2.1569 } ,
+        { /*139 , */ 17.5977,2.1648 } ,
+        { /*140 , */ 17.7201,2.1726 } ,
+        { /*141 , */ 17.8426,2.1804 } ,
+        { /*142 , */ 17.9650,2.1881 } ,
+        { /*143 , */ 18.0875,2.1959 } ,
+        { /*144 , */ 18.2099,2.2036 } ,
+        { /*145 , */ 18.3324,2.2113 } ,
+        { /*146 , */ 18.4548,2.2189 } ,
+        { /*147 , */ 18.5773,2.2265 } ,
+        { /*148 , */ 18.6997,2.2341 } ,
+        { /*149 , */ 18.8222,2.2417 } ,
+        { /*150 , */ 18.9446,2.2493 } ,
+        { /*151 , */ 19.0671,2.2568 } ,
+        { /*152 , */ 19.1895,2.2643 } ,
+        { /*153 , */ 19.3120,2.2718 } ,
+        { /*154 , */ 19.4344,2.2793 } ,
+        { /*155 , */ 19.5569,2.2867 } ,
+        { /*156 , */ 19.6793,2.2941 } ,
+        { /*157 , */ 19.8018,2.3015 } ,
+        { /*158 , */ 19.9242,2.3088 } ,
+        { /*159 , */ 20.0466,2.3161 } ,
+        { /*160 , */ 20.1691,2.3235 } ,
+        { /*161 , */ 20.2915,2.3307 } ,
+        { /*162 , */ 20.4140,2.3380 } ,
+        { /*163 , */ 20.5364,2.3452 } ,
+        { /*164 , */ 20.6589,2.3525 } ,
+        { /*165 , */ 20.7813,2.3597 } ,
+        { /*166 , */ 20.9038,2.3669 } ,
+        { /*167 , */ 21.0262,2.3740 } ,
+        { /*168 , */ 21.1487,2.3811 } ,
+        { /*169 , */ 21.2711,2.3883 } ,
+        { /*170 , */ 21.3936,2.3953 } ,
+        { /*171 , */ 21.5160,2.4024 } ,
+        { /*172 , */ 21.6385,2.4095 } ,
+        { /*173 , */ 21.7609,2.4165 } ,
+        { /*174 , */ 21.8834,2.4235 } ,
+        { /*175 , */ 22.0058,2.4305 } ,
+        { /*176 , */ 22.1283,2.4375 } ,
+        { /*177 , */ 22.2507,2.4444 } ,
+        { /*178 , */ 22.3732,2.4513 } ,
+        { /*179 , */ 22.4956,2.4582 } ,
+        { /*180 , */ 22.6181,2.4651 } ,
+        { /*181 , */ 22.7405,2.4720 } ,
+        { /*182 , */ 22.8630,2.4788 } ,
+        { /*183 , */ 22.9854,2.4857 } ,
+        { /*184 , */ 23.1079,2.4925 } ,
+        { /*185 , */ 23.2303,2.4993 } ,
+        { /*186 , */ 23.3528,2.5061 } ,
+        { /*187 , */ 23.4752,2.5128 } ,
+        { /*188 , */ 23.5977,2.5196 } ,
+        { /*189 , */ 23.7201,2.5263 } ,
+        { /*190 , */ 23.8426,2.5330 } ,
+        { /*191 , */ 23.9650,2.5397 } ,
+        { /*192 , */ 24.0875,2.5463 } ,
+        { /*193 , */ 24.2099,2.5530 } ,
+        { /*194 , */ 24.3324,2.5597 } ,
+        { /*195 , */ 24.4548,2.5662 } ,
+        { /*196 , */ 24.5773,2.5728 } ,
+        { /*197 , */ 24.6997,2.5794 } ,
+        { /*198 , */ 24.8222,2.5860 } ,
+        { /*199 , */ 24.9446,2.5925 } ,
+        { /*200 , */ 25.0671,2.5991 } ,
+        { /*201 , */ 25.1895,2.6056 } ,
+        { /*202 , */ 25.3120,2.6121 } ,
+        { /*203 , */ 25.4344,2.6186 } ,
+        { /*204 , */ 25.5569,2.6251 } ,
+        { /*205 , */ 25.6793,2.6315 } ,
+        { /*206 , */ 25.8018,2.6379 } ,
+        { /*207 , */ 25.9242,2.6443 } ,
+        { /*208 , */ 26.0466,2.6508 } ,
+        { /*209 , */ 26.1691,2.6572 } ,
+        { /*210 , */ 26.2915,2.6635 } ,
+        { /*211 , */ 26.4140,2.6699 } ,
+        { /*212 , */ 26.5364,2.6762 } ,
+        { /*213 , */ 26.6589,2.6826 } ,
+        { /*214 , */ 26.7813,2.6889 } ,
+        { /*215 , */ 26.9038,2.6952 } ,
+        { /*216 , */ 27.0262,2.7015 } ,
+        { /*217 , */ 27.1487,2.7077 } ,
+        { /*218 , */ 27.2711,2.7140 } ,
+        { /*219 , */ 27.3936,2.7202 } ,
+        { /*220 , */ 27.5160,2.7264 } ,
+        { /*221 , */ 27.6385,2.7327 } ,
+        { /*222 , */ 27.7609,2.7389 } ,
+        { /*223 , */ 27.8834,2.7451 } ,
+        { /*224 , */ 28.0058,2.7512 } ,
+        { /*225 , */ 28.1283,2.7574 } ,
+        { /*226 , */ 28.2507,2.7635 } ,
+        { /*227 , */ 28.3732,2.7697 } ,
+        { /*228 , */ 28.4956,2.7757 } ,
+        { /*229 , */ 28.6181,2.7819 } ,
+        { /*230 , */ 28.7405,2.7880 } ,
+        { /*231 , */ 28.8630,2.7940 } ,
+        { /*232 , */ 28.9854,2.8001 } ,
+        { /*233 , */ 29.1079,2.8061 } ,
+        { /*234 , */ 29.2303,2.8122 } ,
+        { /*235 , */ 29.3528,2.8183 } ,
+        { /*236 , */ 29.4752,2.8242 } ,
+        { /*237 , */ 29.5977,2.8302 } ,
+        { /*238 , */ 29.7201,2.8362 } ,
+        { /*239 , */ 29.8426,2.8422 } ,
+        { /*240 , */ 29.9650,2.8481 } ,
+        { /*241 , */ 30.0875,2.8541 } ,
+        { /*242 , */ 30.2099,2.8600 } ,
+        { /*243 , */ 30.3324,2.8659 } ,
+        { /*244 , */ 30.4548,2.8718 } ,
+        { /*245 , */ 30.5773,2.8778 } ,
+        { /*246 , */ 30.6997,2.8836 } ,
+        { /*247 , */ 30.8222,2.8895 } ,
+        { /*248 , */ 30.9446,2.8954 } ,
+        { /*249 , */ 31.0671,2.9012 } ,
+        { /*250 , */ 31.1895,2.9071 } ,
+        { /*251 , */ 31.3120,2.9129 } ,
+        { /*252 , */ 31.4344,2.9187 } ,
+        { /*253 , */ 31.5569,2.9245 } ,
+        { /*254 , */ 31.6793,2.9303 } ,
+        { /*255 , */ 31.8017,2.9361 } ,
+        { /*256 , */ 31.9242,2.9418 } ,
+        { /*257 , */ 32.0466,2.9476 } ,
+        { /*258 , */ 32.1691,2.9533 } ,
+        { /*259 , */ 32.2915,2.9591 } ,
+        { /*260 , */ 32.4140,2.9649 } ,
+        { /*261 , */ 32.5364,2.9706 } ,
+        { /*262 , */ 32.6589,2.9763 } ,
+        { /*263 , */ 32.7813,2.9820 } ,
+        { /*264 , */ 32.9038,2.9876 } ,
+        { /*265 , */ 33.0262,2.9933 } ,
+        { /*266 , */ 33.1487,2.9990 } ,
+        { /*267 , */ 33.2711,3.0046 } ,
+        { /*268 , */ 33.3936,3.0102 } ,
+        { /*269 , */ 33.5160,3.0159 } ,
+        { /*270 , */ 33.6385,3.0215 } ,
+        { /*271 , */ 33.7609,3.0271 } ,
+        { /*272 , */ 33.8834,3.0327 } ,
+        { /*273 , */ 34.0058,3.0384 } ,
+        { /*274 , */ 34.1283,3.0439 } ,
+        { /*275 , */ 34.2507,3.0494 } ,
+        { /*276 , */ 34.3732,3.0550 } ,
+        { /*277 , */ 34.4956,3.0605 } ,
+        { /*278 , */ 34.6181,3.0661 } ,
+        { /*279 , */ 34.7405,3.0716 } ,
+        { /*280 , */ 34.8630,3.0772 } ,
+        { /*281 , */ 34.9854,3.0826 } ,
+        { /*282 , */ 35.1079,3.0881 } ,
+        { /*283 , */ 35.2303,3.0936 } ,
+        { /*284 , */ 35.3528,3.0990 } ,
+        { /*285 , */ 35.4752,3.1045 } ,
+        { /*286 , */ 35.5977,3.1099 } ,
+        { /*287 , */ 35.7201,3.1154 } ,
+        { /*288 , */ 35.8426,3.1209 } ,
+        { /*289 , */ 35.9650,3.1264 } ,
+        { /*290 , */ 36.0875,3.1317 } ,
+        { /*291 , */ 36.2099,3.1371 } ,
+        { /*292 , */ 36.3324,3.1426 } ,
+        { /*293 , */ 36.4548,3.1479 } ,
+        { /*294 , */ 36.5773,3.1533 } ,
+        { /*295 , */ 36.6997,3.1587 } ,
+        { /*296 , */ 36.8222,3.1640 } ,
+        { /*297 , */ 36.9446,3.1694 } ,
+        { /*298 , */ 37.0671,3.1748 } ,
+        { /*299 , */ 37.1895,3.1801 } ,
+        { /*300 , */ 37.3120,3.1854 } ,
+        { /*301 , */ 37.4344,3.1907 } ,
+        { /*302 , */ 37.5568,3.1961 } ,
+        { /*303 , */ 37.6793,3.2013 } ,
+        { /*304 , */ 37.8017,3.2066 } ,
+        { /*305 , */ 37.9242,3.2119 } ,
+        { /*306 , */ 38.0466,3.2172 } ,
+        { /*307 , */ 38.1691,3.2225 } ,
+        { /*308 , */ 38.2915,3.2277 } ,
+        { /*309 , */ 38.4140,3.2329 } ,
+        { /*310 , */ 38.5364,3.2382 } ,
+        { /*311 , */ 38.6589,3.2435 } ,
+        { /*312 , */ 38.7813,3.2487 } ,
+        { /*313 , */ 38.9038,3.2539 } ,
+        { /*314 , */ 39.0262,3.2591 } ,
+        { /*315 , */ 39.1487,3.2643 } ,
+        { /*316 , */ 39.2711,3.2695 } ,
+        { /*317 , */ 39.3936,3.2747 } ,
+        { /*318 , */ 39.5160,3.2798 } ,
+        { /*319 , */ 39.6385,3.2850 } ,
+        { /*320 , */ 39.7609,3.2902 } ,
+        { /*321 , */ 39.8834,3.2953 } ,
+        { /*322 , */ 40.0058,3.3006 } ,
+        { /*323 , */ 40.1283,3.3056 } ,
+        { /*324 , */ 40.2507,3.3107 } ,
+        { /*325 , */ 40.3732,3.3159 } ,
+        { /*326 , */ 40.4956,3.3210 } ,
+        { /*327 , */ 40.6181,3.3261 } ,
+        { /*328 , */ 40.7405,3.3312 } ,
+        { /*329 , */ 40.8630,3.3362 } ,
+        { /*330 , */ 40.9854,3.3413 } ,
+        { /*331 , */ 41.1079,3.3464 } ,
+        { /*332 , */ 41.2303,3.3515 } ,
+        { /*333 , */ 41.3528,3.3565 } ,
+        { /*334 , */ 41.4752,3.3616 } ,
+        { /*335 , */ 41.5977,3.3666 } ,
+        { /*336 , */ 41.7201,3.3717 } ,
+        { /*337 , */ 41.8426,3.3767 } ,
+        { /*338 , */ 41.9650,3.3817 } ,
+        { /*339 , */ 42.0875,3.3867 } ,
+        { /*340 , */ 42.2099,3.3917 } ,
+        { /*341 , */ 42.3324,3.3967 } ,
+        { /*342 , */ 42.4548,3.4018 } ,
+        { /*343 , */ 42.5773,3.4067 } ,
+        { /*344 , */ 42.6997,3.4116 } ,
+        { /*345 , */ 42.8222,3.4166 } ,
+        { /*346 , */ 42.9446,3.4216 } ,
+        { /*347 , */ 43.0671,3.4265 } ,
+        { /*348 , */ 43.1895,3.4315 } ,
+        { /*349 , */ 43.3119,3.4364 } ,
+        { /*350 , */ 43.4344,3.4413 } ,
+        { /*351 , */ 43.5568,3.4463 } ,
+        { /*352 , */ 43.6793,3.4512 } ,
+        { /*353 , */ 43.8017,3.4561 } ,
+        { /*354 , */ 43.9242,3.4610 } ,
+        { /*355 , */ 44.0466,3.4659 } ,
+        { /*356 , */ 44.1691,3.4708 } ,
+        { /*357 , */ 44.2915,3.4757 } ,
+        { /*358 , */ 44.4140,3.4805 } ,
+        { /*359 , */ 44.5364,3.4855 } ,
+        { /*360 , */ 44.6589,3.4902 } ,
+        { /*361 , */ 44.7813,3.4952 } ,
+        { /*362 , */ 44.9038,3.5000 } ,
+        { /*363 , */ 45.0262,3.5048 } ,
+        { /*364 , */ 45.1487,3.5097 } ,
+        { /*365 , */ 45.2711,3.5145 } ,
+        { /*366 , */ 45.3936,3.5193 } ,
+        { /*367 , */ 45.5160,3.5242 } ,
+        { /*368 , */ 45.6385,3.5290 } ,
+        { /*369 , */ 45.7609,3.5338 } ,
+        { /*370 , */ 45.8834,3.5385 } ,
+        { /*371 , */ 46.0058,3.5434 } ,
+        { /*372 , */ 46.1283,3.5481 } ,
+        { /*373 , */ 46.2507,3.5529 } ,
+        { /*374 , */ 46.3732,3.5577 } ,
+        { /*375 , */ 46.4956,3.5625 } ,
+        { /*376 , */ 46.6181,3.5672 } ,
+        { /*377 , */ 46.7405,3.5719 } ,
+        { /*378 , */ 46.8630,3.5767 } ,
+        { /*379 , */ 46.9854,3.5815 } ,
+        { /*380 , */ 47.1079,3.5862 } ,
+        { /*381 , */ 47.2303,3.5909 } ,
+        { /*382 , */ 47.3528,3.5956 } ,
+        { /*383 , */ 47.4752,3.6004 } ,
+        { /*384 , */ 47.5977,3.6051 } ,
+        { /*385 , */ 47.7201,3.6097 } ,
+        { /*386 , */ 47.8426,3.6144 } ,
+        { /*387 , */ 47.9650,3.6191 } ,
+        { /*388 , */ 48.0875,3.6238 } ,
+        { /*389 , */ 48.2099,3.6284 } ,
+        { /*390 , */ 48.3324,3.6332 } ,
+        { /*391 , */ 48.4548,3.6379 } ,
+        { /*392 , */ 48.5773,3.6424 } ,
+        { /*393 , */ 48.6997,3.6472 } ,
+        { /*394 , */ 48.8222,3.6518 } ,
+        { /*395 , */ 48.9446,3.6564 } ,
+        { /*396 , */ 49.0671,3.6610 } ,
+        { /*397 , */ 49.1895,3.6657 } ,
+        { /*398 , */ 49.3119,3.6704 } ,
+        { /*399 , */ 49.4344,3.6751 } ,
+        { /*400 , */ 49.5568,3.6996 } ,
+};
+
+float
+ocr(unsigned int n, float* stdv)
+{
+    if( ! (0 < n && n <= nData) ) {
+        return 0.0;
+    }
+
+    if( stdv ) {
+        *stdv = ocrData[n-1][1];
+    }
+
+    return ocrData[n-1][0];
+}
+
 // ------------------------------------------------------------------
 // Given a 10-byte GNUBG “auch” key, emit the 20-char A–Z position ID
 static const char*
@@ -898,9 +1317,320 @@ py_rollout(PyObject* /*self*/, PyObject* args, PyObject* kwargs)
     );
 }
 
+//-----------------------------------------------------------------------------
+// cubefullRollout(pos, ngames=576, side='X', ply=0) -> 13-element tuple of floats
+static PyObject*
+py_cubefullRollout(PyObject* /*self*/, PyObject* args, PyObject* kwargs)
+{
+    // Define default values for the arguments
+    int nGames = 576;
+    int nPlies = 0;
+    char side = 'X';
+
+    // Board representation
+    AnalyzeBoard board;
+
+    // Define the list of keywords for the argument parsing
+    static const char* kwlist[] = {"pos", "ngames", "side", "ply", NULL};
+
+    // Parse the input arguments
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O&|ci", (char**)kwlist,
+                                     anyAnalyzeBoard, board,
+                                     &nGames, &side, &nPlies)) {
+        return NULL;
+    }
+
+    // Check the side input and set the flag for which player is on play
+    bool xOnPlay = false;
+    switch (side) {
+        case 'X': case 'x':
+            xOnPlay = true; break;
+        case 'O': case 'o':
+            xOnPlay = false; break;
+        default:
+            PyErr_SetString(PyExc_ValueError, "Invalid side. Expected 'X' or 'O'.");
+            return NULL;
+    }
+
+    // Set the board to the Analyze structure
+    Analyze::GNUbgBoard anBoard;
+    Analyze::set(board, anBoard, xOnPlay);
+
+    // Perform the rollout
+    const float* result = analyzer.rolloutCubefull(anBoard, nPlies, nGames, xOnPlay);
+
+    // Prepare the result tuple with 13 floats
+    PyObject* tuple = PyTuple_New(13);
+    if (!tuple) return NULL;
+
+    // Fill the tuple with the values from the result array
+    for (int i = 0; i < 13; ++i) {
+        PyTuple_SET_ITEM(tuple, i, PyFloat_FromDouble(result[i]));
+    }
+
+    return tuple;
+}
+
+static PyObject*
+py_set_equities(PyObject* /*self*/, PyObject* const args)
+{
+    const char* which;
+
+    // Case 1: One argument (string)
+    if (PyTuple_Size(args) == 1) {
+        if (!PyArg_ParseTuple(args, "s", &which)) {
+            return NULL;
+        }
+
+        if (strcasecmp("gnur", which) == 0) {
+            Equities::set(Equities::gnur);
+        } else if (strcasecmp("jacobs", which) == 0) {
+            Equities::set(Equities::Jacobs);
+        } else if (strcasecmp("woolsey", which) == 0) {
+            Equities::set(Equities::WoolseyHeinrich);
+        } else if (strcasecmp("snowie", which) == 0) {
+            Equities::set(Equities::Snowie);
+        } else if (strcasecmp("mec26", which) == 0) {
+            Equities::set(Equities::mec26);
+        } else if (strcasecmp("mec57", which) == 0) {
+            Equities::set(Equities::mec57);
+        } else {
+            PyErr_SetString(PyExc_RuntimeError, "Not a valid equities table name");
+            return NULL;
+        }
+    }
+        // Case 2: Two arguments (doubles for weights and growth rates)
+    else if (PyTuple_Size(args) == 2) {
+        double w, gr;
+        if (!PyArg_ParseTuple(args, "dd", &w, &gr)) {
+            return NULL;
+        }
+
+        if (!(w > 0.0 && w < 1.0 && gr > 0.0 && gr < 1.0)) {
+            PyErr_SetString(PyExc_ValueError, "Weights and growth rates must be in [0, 1] range");
+            return NULL;
+        }
+
+        Equities::set(w, gr);
+    } else {
+        // Wrong number of arguments
+        PyErr_SetString(PyExc_TypeError, "Expected either one string or two floats (weight, growth_rate)");
+        return NULL;
+    }
+
+    // Return None (success)
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// Seed function
+static PyObject* set_seed(PyObject* self, PyObject* args) {
+    unsigned long seed;
+    if (!PyArg_ParseTuple(args, "l", &seed)) {
+        return NULL;
+    }
+
+    // Set the seed in the random number generator
+    Analyze::srandom(seed);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// Shortcuts function
+static PyObject* set_shortcuts(PyObject* self, PyObject* args) {
+    int use;
+    if (!PyArg_ParseTuple(args, "i", &use)) {
+        return NULL;
+    }
+
+    // Enable or disable evaluation shortcuts
+    setShortCuts(use);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// Enable/Disable OS database function
+static PyObject* set_osdb(PyObject* self, PyObject* args) {
+    int use;
+    if (!PyArg_ParseTuple(args, "i", &use)) {
+        return NULL;
+    }
+
+    // Enable or disable the OS database
+    if (use) {
+        enableOSdb();
+    } else {
+        disableOSdb();
+    }
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// Set move filters function
+static PyObject* set_ps(PyObject* self, PyObject* args) {
+    int nPlies, nMoves, nAdditional;
+    double threshold;
+    if (!PyArg_ParseTuple(args, "iiid", &nPlies, &nMoves, &nAdditional, &threshold)) {
+        return NULL;
+    }
+
+    // Set the move filters
+    setPlyBounds(nPlies, nMoves, nAdditional, threshold);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// Set equities table function
+//static PyObject* set_equities(PyObject* self, PyObject* args) {
+//    const char* which;
+//    if (PyTuple_Size(args) == 1) {
+//        if (!PyArg_ParseTuple(args, "s", &which)) {
+//            return NULL;
+//        }
+//
+//        if (strcasecmp("gnur", which) == 0) {
+//            Equities::set(Equities::gnur);
+//        } else if (strcasecmp("jacobs", which) == 0) {
+//            Equities::set(Equities::Jacobs);
+//        } else if (strcasecmp("woolsey", which) == 0) {
+//            Equities::set(Equities::WoolseyHeinrich);
+//        } else if (strcasecmp("snowie", which) == 0) {
+//            Equities::set(Equities::Snowie);
+//        } else if (strcasecmp("mec26", which) == 0) {
+//            Equities::set(Equities::mec26);
+//        } else if (strcasecmp("mec57", which) == 0) {
+//            Equities::set(Equities::mec57);
+//        } else {
+//            PyErr_SetString(PyExc_RuntimeError, "Not a valid equities table name");
+//            return NULL;
+//        }
+//    } else if (PyTuple_Size(args) == 2) {
+//        double w, gr;
+//        if (!PyArg_ParseTuple(args, "dd", &w, &gr)) {
+//            return NULL;
+//        }
+//
+//        if (!(w > 0.0 && w < 1.0 && gr > 0.0 && gr < 1.0)) {
+//            PyErr_SetString(PyExc_ValueError, "Weights and growth rates must be in [0, 1] range");
+//            return NULL;
+//        }
+//
+//        // Set the custom equities table
+//        Equities::set(w, gr);
+//    } else {
+//        PyErr_SetString(PyExc_TypeError, "Expected either one string or two floats (weight, growth_rate)");
+//        return NULL;
+//    }
+//
+//    Py_INCREF(Py_None);
+//    return Py_None;
+//}
+
+// Set match score function
+static PyObject* set_score(PyObject* self, PyObject* args) {
+    int usAway, opAway, crawford = 0;
+    if (!PyArg_ParseTuple(args, "ii|i", &usAway, &opAway, &crawford)) {
+        return NULL;
+    }
+
+    if (usAway < 0 || opAway < 0 || (crawford < 0 || crawford > 1)) {
+        return NULL;
+    }
+
+    if (crawford == 1 && !((opAway == 1 && usAway > 1) || (opAway > 1 && usAway == 1))) {
+        PyErr_SetString(PyExc_RuntimeError, "Away not compatible with crawford");
+        return NULL;
+    }
+
+    // Set the match score in the analyzer
+    analyzer.setScore(opAway, usAway);
+    analyzer.crawford(crawford);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// Set match cube function
+static PyObject* set_cube(PyObject* self, PyObject* args) {
+    int cube;
+    char x = 0;
+    if (!PyArg_ParseTuple(args, "i|c", &cube, &x)) {
+        return NULL;
+    }
+
+    if (cube <= 0) {
+        return NULL;
+    }
+
+    bool xOwn = false;
+    if (cube > 1) {
+        if (x == 0) {
+            return NULL;
+        }
+
+        if (tolower(x) == 'x') {
+            xOwn = true;
+        } else if (tolower(x) == 'o') {
+            xOwn = false;
+        } else {
+            return NULL;
+        }
+    }
+
+    // Set the cube in the analyzer
+    analyzer.setCube(cube, xOwn);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+static PyObject* equities_value(PyObject* /*self*/, PyObject* const args)
+{
+    int xAway, oAway;
+
+    if (!PyArg_ParseTuple(args, "ii", &xAway, &oAway)) {
+        return NULL;
+    }
+
+    if (!(0 <= xAway && xAway <= 25 &&  0 <= oAway && oAway <= 25)) {
+        PyErr_SetString(PyExc_ValueError, "Score not in 0-25 range");
+        return NULL;
+    }
+
+    // Call the Equities class static method to get the value
+    float v = Equities::value(xAway, oAway);
+
+    return PyFloat_FromDouble(v);
+}
+
+static PyObject*
+py_onecrace(PyObject*, PyObject* const args)
+{
+    int n;
+
+    // Parse the argument (an integer)
+    if (!PyArg_ParseTuple(args, "i", &n)) {
+        return NULL;
+    }
+
+    float stdv;
+    float v = ocr(n, &stdv);  // Call the ocr function
+
+    if (v == 0.0) {
+        return NULL;  // If OCR returns 0.0, we return None
+    }
+
+    // Return the result as a tuple of two floats (v and stdv)
+    return Py_BuildValue("dd", v, stdv);
+}
+
+
 static PyMethodDef GnubgMethods[] = {
         {"classify", py_classify, METH_VARARGS, "Classify a board position."},
-//        {"eval_score", py_eval_score, METH_VARARGS, "Evaluate win/gammon/bg probabilities."},
         {"pubbestmove", py_pubbestmove, METH_VARARGS, "Get best move using public evaluation."},
         {"boardfromid", py_boardfromid, METH_VARARGS, "Convert a GNUBG Position ID to a board list"},
         {"boardfromkey",
@@ -954,8 +1684,52 @@ static PyMethodDef GnubgMethods[] = {
                 "  nt     : truncation length\n"
                 "  std    : if nonzero, also return stderr array\n\n"
                 "Returns a 5-tuple of floats, or if std=1 a pair of 5-tuples." },
+        { "crollout",
+                (PyCFunction)py_cubefullRollout,
+                METH_VARARGS | METH_KEYWORDS,
+                "cubefullRollout(pos, ngames=576, side='X', ply=0) -> 13-element tuple\n"
+                "Simulate a set of cube rolls and return the results as 13 floats." },
+//        {"equities", (PyCFunction)py_set_equities, METH_VARARGS, "Set the equities table or set custom weight and growth rate."},
+        {"onecrace", py_onecrace, METH_VARARGS, "OCR function to compute value and standard deviation for a given number."},
         {NULL, NULL, 0, NULL}
 };
+
+// Method table for the 'equities' submodule
+static PyMethodDef gnubg_equities_methods[] = {
+        {"value", equities_value, METH_VARARGS, "Get the equities value for a given position."},
+        {NULL, NULL, 0, NULL}  // Sentinel to mark the end of the method table
+};
+
+// Create a PyModuleDef for the 'equities' submodule
+static PyModuleDef gnubg_equities_module = {
+        PyModuleDef_HEAD_INIT,  // Standard header for all Python modules
+        "equities",             // Name of the submodule
+        "Equities-related methods for GNUBG", // Module docstring
+        -1,                     // Size of the module, -1 means no state
+        gnubg_equities_methods  // Method table
+};
+
+// Define the method table for the 'set' submodule
+static PyMethodDef gnubg_set_methods[] = {
+        {"seed", set_seed, METH_VARARGS, "Set internal random generator seed."},
+        {"shortcuts", set_shortcuts, METH_VARARGS, "Set evaluation shortcuts."},
+        {"osdb", set_osdb, METH_VARARGS, "Enable/Disable OS database"},
+        {"ps", set_ps, METH_VARARGS, "Set move filters"},
+        {"equities", py_set_equities, METH_VARARGS, "Set equities table to use"},
+        {"score", set_score, METH_VARARGS, "Set match score"},
+        {"cube", set_cube, METH_VARARGS, "Set match cube"},
+        {NULL, NULL, 0, NULL}  // Sentinel to mark the end of the method table
+};
+
+// Define the 'set' submodule
+static PyModuleDef gnubg_set_module = {
+        PyModuleDef_HEAD_INIT,
+        "set",            // Module name
+        "Set various parameters for the GNUBG engine", // Module docstring
+        -1,               // Size of the module state, -1 means no state
+        gnubg_set_methods // Method table
+};
+
 
 static struct PyModuleDef gnubgmodule = {
         PyModuleDef_HEAD_INIT,
@@ -968,12 +1742,40 @@ static struct PyModuleDef gnubgmodule = {
 PyMODINIT_FUNC
 PyInit_gnubg(void)
 {
+    // Initialize the module
+    PyObject* m = PyModule_Create(&gnubgmodule);
+    if (m == NULL) {
+        return NULL;
+    }
+
+    // Create the 'equities' submodule
+    PyObject* equities_module = PyModule_Create(&gnubg_equities_module);
+    if (equities_module == NULL) {
+        return NULL;
+    }
+
+    // Add the 'equities' submodule to the main module
+    PyModule_AddObject(m, "equities", equities_module);
+
+    // Create the 'set' submodule
+    PyObject* set_module = PyModule_Create(&gnubg_set_module);
+    if (set_module == NULL) {
+        return NULL;
+    }
+
+    // Add the 'set' submodule to the main module
+    PyModule_AddObject(m, "set", set_module);
+
+    // Get the path to the GNUBG data directory
     Dl_info dl_info;
     dladdr((void*)PyInit_gnubg, &dl_info);
     std::string base = dirname(strdup(dl_info.dli_fname));
     std::string datadir = base + "/gnubg_data";
 
     std::string weights = datadir + "/gnubg.weights";
+    std::string os_bd   = datadir + "/gnubg_os.db";
+    std::string ts0_bd  = datadir + "/gnubg_ts0.bd";
+    std::string os0_bd  = datadir + "/gnubg_os0.bd";
     // … any other .bd paths if you need them …
 
     // 1) Initialize GNUBG (loads all six nets into the global `nets[]`)
@@ -986,8 +1788,33 @@ PyInit_gnubg(void)
     // 2) (Optional but strongly recommended) enable SSE optimizations
     useSSE(1);
 
-    // 4) Finally create and return your Python extension
-    return PyModule_Create(&gnubgmodule);
+    // 3) Expose constants for CLASS_* categories
+    PyModule_AddIntConstant(m, "c_over", CLASS_OVER);
+    PyModule_AddIntConstant(m, "c_bearoff", CLASS_BEAROFF1);
+    PyModule_AddIntConstant(m, "c_race", CLASS_RACE);
+    PyModule_AddIntConstant(m, "c_crashed", CLASS_CRASHED);
+#if defined(CONTAINMENT_CODE)
+    PyModule_AddIntConstant(m, "c_backcontain", CLASS_BACKCONTAIN);
+#endif
+    PyModule_AddIntConstant(m, "c_contact", CLASS_CONTACT);
+
+    // Expose constants for PLY_* categories
+    PyModule_AddIntConstant(m, "p_osr", PLY_OSR);
+    PyModule_AddIntConstant(m, "p_bearoff", PLY_BEAROFF);
+    PyModule_AddIntConstant(m, "p_prune", PLY_PRUNE);
+    PyModule_AddIntConstant(m, "p_1sbear", PLY_1SBEAR);
+    PyModule_AddIntConstant(m, "p_race", PLY_RACENET);
+    PyModule_AddIntConstant(m, "p_1srace", PLY_1SRACE);
+    PyModule_AddIntConstant(m, "p_0plus1", PLY_1ANDHALF);
+
+    // Expose constants for Analyze::RolloutEndsAt categories
+    PyModule_AddIntConstant(m, "ro_race", Analyze::RACE);
+    PyModule_AddIntConstant(m, "ro_bearoff", Analyze::BEAROFF);
+    PyModule_AddIntConstant(m, "ro_over", Analyze::OVER);
+    PyModule_AddIntConstant(m, "ro_auto", Analyze::AUTO);
+
+    // 4) Finally return the Python extension module
+    return m;
 }
 
 

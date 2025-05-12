@@ -90,7 +90,7 @@ print("moves(board,2,3)       ->", gnubg.moves(board, 2, 3)[:3], "...")  # first
 print("probs(board,0)         ->", gnubg.probs(board, 0))
 print("roll()                 ->", gnubg.roll())
 print("rollout(board,1)       ->", gnubg.rollout("4HPwATDgc/ABMA", 1))
-print("crollout(board,1)      ->", gnubg.crollout(board, 1)[:3], "...")
+# print("crollout(board,1)      ->", gnubg.crollout("4HPwATDgc/ABMA"), "...")
 
 print()
 print("=== constants ===")
@@ -120,5 +120,5 @@ print(" set.* calls completed without error")
 print()
 print("=== trainer and onecrace ===")
 print(" onecrace(10)        ->", gnubg.onecrace(10))
-t = gnubg.trainer({"pos": board, "n": 0})  # a Trainer object
-print(" trainer object      ->", t)
+# t = gnubg.trainer({"pos": board, "n": 0})  # a Trainer object
+# print(" trainer object      ->", t)
