@@ -1,0 +1,40 @@
+name: Build Linux
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python 2 and Python 3
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python2 python2-dev python3 python3-dev
+          # Install necessary build dependencies
+          sudo apt-get install -y autoconf automake libtool gcc g++ make
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel setuptools twine
+      - name: Run autogen and configure with Python 2
+        run: |
+          ./autogen.sh  # or autoreconf -fvi
+          ./configure --with-python=python2  # Configure the build system
+      - name: Build the wheel
+        run: |
+          cd py
+          python3 setup.py bdist_wheel  # Build the wheel with Python 3
+      - name: Upload wheel to GitHub release
+        run: |
+          GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          curl -sL https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.tar.gz | tar xz
+          ./gh_*/bin/gh release create v${{ github.run_number }} py/dist/*.whl --title "Build v${{ github.run_number }}" --notes "Wheel build from GitHub Actions"
