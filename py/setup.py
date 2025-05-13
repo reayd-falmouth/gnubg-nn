@@ -28,12 +28,14 @@ gnubg_module = Extension(
 setup(
     name="gnubg",
     version="1.1",
-    packages=find_packages(include=['gnubg','gnubg.*']),
+    packages=find_packages(),             # finds [ "gnubg" ]
     ext_modules=[gnubg_module],
-    package_data={
-        'gnubg': ['gnubg/data/*.bd', 'gnubg/data/*.weights', 'gnubg/data/*.db']
+    include_package_data=True,            # read MANIFEST.in for sdist
+    package_data={                        # include these in the wheel
+        'gnubg': ['data/*.bd',
+                  'data/*.weights',
+                  'data/*.db'],
     },
-    include_package_data=True,
     description='Python3 bindings for GNUBG neural evaluation',
     author='David Reay',
     author_email='dr323090@falmouth.ac.uk',
