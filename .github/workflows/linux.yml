@@ -69,7 +69,9 @@ jobs:
 
       - name: Install the built package and run tests
         run: |
-          pip install py/dist/gnubg-1.01-cp310-cp310-linux_x86_64.whl
+          ls -la py/
+          ls -la py/dist/
+          pip install py/dist/gnubg-1.1-cp310-cp310-linux_x86_64.whl
           python -c "import gnubg; print(gnubg.__version__)"
           cd py
           poetry run python test.py
@@ -77,7 +79,7 @@ jobs:
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gnubg-1.01-cp310-cp310-linux_x86_64
+          name: gnubg-1.1-cp310-cp310-linux_x86_64
           path: py/dist/
 
       - name: Upload to PyPI (optional)
