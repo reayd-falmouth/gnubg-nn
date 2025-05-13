@@ -46,10 +46,14 @@ jobs:
           python-version-file: py/.python-version
 
       - name: Build Python extension
-        run: make
+        run: | 
+          cd py
+          make
 
       - name: Install the built package and run tests
-        run: make test
+        run: |
+          cd py
+          make test
 
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
