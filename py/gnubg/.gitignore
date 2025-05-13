@@ -1,0 +1,4 @@
+*.c
+*.cc
+lib
+gnubg.egg-info
