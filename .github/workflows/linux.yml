@@ -36,9 +36,9 @@ jobs:
           # Install additional libraries as needed (e.g., GTK, OpenSSL, zlib)
           sudo apt install libgtk-3-dev libssl-dev zlib1g-dev
           
-          # Regenerate the configure script and generate config.h
-          autoreconf -i
-          ./configure
+          #          # Regenerate the configure script and generate config.h
+          #          autoreconf -i
+          #          ./configure
 
       - name: Set up python
         uses: actions/setup-python@v4.4.0
@@ -46,9 +46,8 @@ jobs:
           python-version-file: py/.python-version
 
       - name: Build Python extension
-        run: | 
-          cd py
-          make
+        cwd: py
+        run: make
 
       - name: Install the built package and run tests
         run: |
