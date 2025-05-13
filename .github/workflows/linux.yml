@@ -67,10 +67,15 @@ jobs:
           poetry build
           ls -la 
 
+      - name: Test the package
+        run: |
+          cd py
+          poetry run python test.py
+
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gnubg-build
+          name: gnubg-1.01-cp310-cp310-linux_x86_64
           path: py/dist/
 
       - name: Install the built package and run tests
