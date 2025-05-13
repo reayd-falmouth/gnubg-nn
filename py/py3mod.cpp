@@ -1772,16 +1772,10 @@ PyInit_gnubg(void)
     std::string base = dirname(strdup(dl_info.dli_fname));
     std::string datadir = base + "/data";
 
-    // Check if GNUBGHOME is set, otherwise use default data directory
-    const char* gnubghome = std::getenv("GNUBGHOME");
-    if (!gnubghome) {
-        gnubghome = datadir.c_str();
-    }
-
-    std::string weights = std::string(gnubghome) + "/gnubg.weights";
-    std::string os_bd   = std::string(gnubghome) + "/gnubg_os.db";
-    std::string ts0_bd  = std::string(gnubghome) + "/gnubg_ts0.bd";
-    std::string os0_bd  = std::string(gnubghome) + "/gnubg_os0.bd";
+    std::string weights = datadir + "/gnubg.weights";
+    std::string os_bd   = datadir + "/gnubg_os.db";
+    std::string ts0_bd  = datadir + "/gnubg_ts0.bd";
+    std::string os0_bd  = datadir + "/gnubg_os0.bd";
     // … any other .bd paths if you need them …
 
     // 1) Initialize GNUBG (loads all six nets into the global `nets[]`)
