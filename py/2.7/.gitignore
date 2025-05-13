@@ -6,6 +6,6 @@ pygnubg
 !Makefile
 Makefile.in
 build/
-gnubg.egg-info
 dist/
 analyze/
+
