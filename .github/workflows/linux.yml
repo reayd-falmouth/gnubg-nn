@@ -61,6 +61,10 @@ jobs:
           poetry run python setup.py build_ext --inplace
           ls -la
 
+      - name: Set GNUBGHOME environment variable
+        run: |
+          echo "GNUBGHOME=$(pwd)/py/data" >> $GITHUB_ENV
+
       - name: Build the package
         run: |
           cd py
