@@ -47,7 +47,10 @@ jobs:
 
       - name: Build Python extension
         working-directory: py
-        run: make
+        run: |
+          pwd
+          ls -la 
+          make
 
       - name: Install the built package and run tests
         working-directory: py
