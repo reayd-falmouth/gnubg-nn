@@ -46,13 +46,12 @@ jobs:
           python-version-file: py/.python-version
 
       - name: Build Python extension
-        cwd: py
+        working-directory: py
         run: make
 
       - name: Install the built package and run tests
-        run: |
-          cd py
-          make test
+        working-directory: py
+        run: make test
 
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
@@ -62,5 +61,6 @@ jobs:
 
       - name: Upload to PyPI (optional)
         if: github.event_name == 'push'
+        working-directory: py
         run: |
-          twine upload py/dist/*
+          twine upload dist/*
