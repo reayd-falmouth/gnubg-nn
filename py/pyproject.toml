@@ -11,8 +11,8 @@ python = ">=3.10,<3.11"
 
 [tool.poetry.group.dev.dependencies]
 setuptools = "^80.4.0"
+twine = "^3.4.0"
 
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools", "wheel",]
 build-backend = "setuptools.build_meta"
-package-mode = false

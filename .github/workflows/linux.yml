@@ -59,3 +59,20 @@ jobs:
           cd py
           poetry run python setup.py clean --all
           poetry run python setup.py build_ext --inplace
+          ls -la
+
+      - name: Upload the dist directory as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: gnubg-dist
+          path: dist/
+
+      - name: Install the built package and run tests
+        run: |
+          pip install dist/gnubg-1.01-cp310-cp310-linux_x86_64.whl
+          python -c "import gnubg; print(gnubg.__version__)"
+
+      - name: Upload to PyPI (optional)
+        if: github.event_name == 'push'
+        run: |
+          twine upload dist/*
