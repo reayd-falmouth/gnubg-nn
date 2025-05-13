@@ -61,11 +61,17 @@ jobs:
           poetry run python setup.py build_ext --inplace
           ls -la
 
+      - name: Build the package
+        run: |
+          cd py
+          poetry build
+          ls -la 
+
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: gnubg-build
-          path: py/build/
+          path: py/dist/
 
       - name: Install the built package and run tests
         run: |
