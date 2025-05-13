@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         run:  |
           cd py
-          poetry install
+          poetry install --no-root
 
       - name: Build Python extension
         run: |
