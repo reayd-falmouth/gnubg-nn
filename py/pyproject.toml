@@ -4,7 +4,6 @@ version = "1.01"
 description = "Python bindings for GNUBG neural evaluation"
 authors = ["David Reay <dr323090@falmouth.ac.uk>"]
 packages = []
-package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
