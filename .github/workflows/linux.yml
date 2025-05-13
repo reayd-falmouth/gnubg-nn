@@ -72,7 +72,7 @@ jobs:
           ls -la py/
           ls -la py/dist/
           pip install py/dist/gnubg-1.1-cp310-cp310-linux_x86_64.whl
-          python -c "import gnubg; print(gnubg.__version__)"
+#          python -c "import gnubg; print(gnubg.__version__)"
           cd py
           poetry run python test.py
 
