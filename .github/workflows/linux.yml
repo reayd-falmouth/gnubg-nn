@@ -18,6 +18,28 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Install deps
+        run: |
+          # Install essential build tools
+          sudo apt update
+          sudo apt install build-essential
+          
+          # Install autoconf and automake for generating the configure script
+          sudo apt install autoconf automake
+          
+          # Install pkg-config to find necessary libraries and headers
+          sudo apt install pkg-config
+          
+          # Install Python development headers (if using Python bindings)
+          sudo apt install python3-dev
+          
+          # Install additional libraries as needed (e.g., GTK, OpenSSL, zlib)
+          sudo apt install libgtk-3-dev libssl-dev zlib1g-dev
+          
+          # Regenerate the configure script and generate config.h
+          autoreconf -i
+          ./configure
+
       - name: Install poetry
         run: pipx install poetry
 
