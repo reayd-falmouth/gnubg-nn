@@ -62,10 +62,10 @@ jobs:
           ls -la
 
       - name: Upload the dist directory as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: gnubg-dist
-          path: dist/
+          path: py/dist/
 
       - name: Install the built package and run tests
         run: |
