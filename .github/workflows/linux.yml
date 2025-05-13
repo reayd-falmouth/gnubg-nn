@@ -67,8 +67,10 @@ jobs:
           poetry build
           ls -la 
 
-      - name: Test the package
+      - name: Install the built package and run tests
         run: |
+          pip install py/dist/gnubg-1.01-cp310-cp310-linux_x86_64.whl
+          python -c "import gnubg; print(gnubg.__version__)"
           cd py
           poetry run python test.py
 
@@ -77,11 +79,6 @@ jobs:
         with:
           name: gnubg-1.01-cp310-cp310-linux_x86_64
           path: py/dist/
-
-      - name: Install the built package and run tests
-        run: |
-          pip install py/dist/gnubg-1.01-cp310-cp310-linux_x86_64.whl
-          python -c "import gnubg; print(gnubg.__version__)"
 
       - name: Upload to PyPI (optional)
         if: github.event_name == 'push'
