@@ -40,44 +40,16 @@ jobs:
           autoreconf -i
           ./configure
 
-      - name: Install poetry
-        run: pipx install poetry
-
       - name: Set up python
         uses: actions/setup-python@v4.4.0
         with:
           python-version-file: py/.python-version
-          cache: 'poetry'
-
-      - name: Install dependencies
-        run:  |
-          cd py
-          poetry install --no-root
 
       - name: Build Python extension
-        run: |
-          cd py
-          poetry run python setup.py clean --all
-          poetry run python setup.py build_ext --inplace
-          ls -la
-
-      - name: Set GNUBGHOME environment variable
-        run: |
-          echo "GNUBGHOME=$(pwd)/py/data" >> $GITHUB_ENV
-
-      - name: Build the package
-        run: |
-          cd py
-          poetry build
-          ls -la 
+        run: make
 
       - name: Install the built package and run tests
-        run: |
-          ls -la py/
-          ls -la py/dist/
-          pip install --force-reinstall py/dist/gnubg-1.1-cp310-cp310-linux_x86_64.whl
-          python py/test.py
-          #          python -c "import gnubg; print(gnubg.__version__)"
+        run: make test
 
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
@@ -88,4 +60,4 @@ jobs:
       - name: Upload to PyPI (optional)
         if: github.event_name == 'push'
         run: |
-          twine upload dist/*
+          twine upload py/dist/*

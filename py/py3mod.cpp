@@ -1792,7 +1792,7 @@ PyInit_gnubg(void)
     // Check if GNUBGHOME is set, otherwise use the default data directory
     const char* gnubghome = std::getenv("GNUBGHOME");
     if (!gnubghome) {
-        gnubghome = datadir.c_str();
+        gnubghome = base.c_str();
     }
 
     // Debug: Print the GNUBGHOME environment variable or fallback
