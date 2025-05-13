@@ -59,6 +59,7 @@ jobs:
           cd py
           poetry run python setup.py clean --all
           poetry run python setup.py build_ext --inplace
+          python -m build
           ls -la
 
       - name: Upload the dist directory as an artifact
