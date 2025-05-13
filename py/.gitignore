@@ -10,3 +10,4 @@ gnubg/
 gnubg.egg-info
 dist/
 analyze/
+gnubg*

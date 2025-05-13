@@ -1739,6 +1739,7 @@ static struct PyModuleDef gnubgmodule = {
         GnubgMethods
 };
 
+
 PyMODINIT_FUNC
 PyInit_gnubg(void)
 {
@@ -1772,23 +1773,42 @@ PyInit_gnubg(void)
     std::string base = dirname(strdup(dl_info.dli_fname));
     std::string datadir = base + "/data";
 
+    // Debug: Print the base path and data directory
+    std::cout << "Base path: " << base << std::endl;
+    std::cout << "Data directory: " << datadir << std::endl;
+
+    // Define paths to required data files
     std::string weights = datadir + "/gnubg.weights";
     std::string os_bd   = datadir + "/gnubg_os.db";
     std::string ts0_bd  = datadir + "/gnubg_ts0.bd";
     std::string os0_bd  = datadir + "/gnubg_os0.bd";
-    // … any other .bd paths if you need them …
 
-    // 1) Initialize GNUBG (loads all six nets into the global `nets[]`)
+    // Debug: Print the paths to the data files
+    std::cout << "Looking for weights at: " << weights << std::endl;
+    std::cout << "Looking for os_bd at: " << os_bd << std::endl;
+    std::cout << "Looking for ts0_bd at: " << ts0_bd << std::endl;
+    std::cout << "Looking for os0_bd at: " << os0_bd << std::endl;
+
+    // Check if GNUBGHOME is set, otherwise use the default data directory
+    const char* gnubghome = std::getenv("GNUBGHOME");
+    if (!gnubghome) {
+        gnubghome = datadir.c_str();
+    }
+
+    // Debug: Print the GNUBGHOME environment variable or fallback
+    std::cout << "GNUBGHOME is set to: " << gnubghome << std::endl;
+
+    // Initialize GNUBG (loads all six nets into the global `nets[]`)
     if (!Analyze::init(weights.c_str())) {
         PyErr_SetString(PyExc_ImportError,
                         "Analyze::init() failed to load GNUBG neural nets");
         return NULL;
     }
 
-    // 2) (Optional but strongly recommended) enable SSE optimizations
+    // Optional SSE optimizations
     useSSE(1);
 
-    // 3) Expose constants for CLASS_* categories
+    // Expose constants for CLASS_* categories
     PyModule_AddIntConstant(m, "c_over", CLASS_OVER);
     PyModule_AddIntConstant(m, "c_bearoff", CLASS_BEAROFF1);
     PyModule_AddIntConstant(m, "c_race", CLASS_RACE);
@@ -1813,8 +1833,6 @@ PyInit_gnubg(void)
     PyModule_AddIntConstant(m, "ro_over", Analyze::OVER);
     PyModule_AddIntConstant(m, "ro_auto", Analyze::AUTO);
 
-    // 4) Finally return the Python extension module
+    // Finally return the Python extension module
     return m;
 }
-
-

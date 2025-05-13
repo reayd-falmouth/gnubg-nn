@@ -1,6 +1,6 @@
 # setup.py - clean Python 3 extension build for GNUBG neural net interface
 
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from glob import glob
 
 # Clean C++ and C interface files
@@ -14,7 +14,7 @@ c_sources = glob("../gnubg/*.c") + glob("../gnubg/lib/*.c") + glob("../analyze/*
 
 # Define the extension module
 gnubg_module = Extension(
-    "gnubg",
+    "gnubg.gnubg",
     sources=cpp_sources + c_sources,
     include_dirs=["../", "../gnubg", "../gnubg/lib", "../analyze", "../py"],
     define_macros=[
@@ -28,9 +28,10 @@ gnubg_module = Extension(
 setup(
     name="gnubg",
     version="1.1",
+    packages=find_packages(include=['gnubg','gnubg.*']),
     ext_modules=[gnubg_module],
     package_data={
-        '': ['data/*.bd', 'data/*.weights', 'data/*.db']
+        'gnubg': ['gnubg/data/*.bd', 'gnubg/data/*.weights', 'gnubg/data/*.db']
     },
     include_package_data=True,
     description='Python3 bindings for GNUBG neural evaluation',

@@ -75,9 +75,8 @@ jobs:
         run: |
           ls -la py/
           ls -la py/dist/
-          pip install py/dist/gnubg-1.1-cp310-cp310-linux_x86_64.whl
-          cd py
-          python test.py
+          pip install --force-reinstall py/dist/gnubg-1.1-cp310-cp310-linux_x86_64.whl
+          python py/test.py
           #          python -c "import gnubg; print(gnubg.__version__)"
 
       - name: Upload the dist directory as an artifact

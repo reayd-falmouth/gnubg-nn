@@ -45,11 +45,13 @@ import os
 import faulthandler
 import sys
 
+dirname = os.path.dirname(__file__)
+
 # make sure we pick up the module you just built
 sys.path.insert(0, ".")
 
 # point GNUBGHOME at your data dir so Analyze::init() can find its files
-os.environ["GNUBGHOME"] = os.path.abspath("data")
+os.environ["GNUBGHOME"] = f"{dirname}/data"
 
 faulthandler.enable()
 

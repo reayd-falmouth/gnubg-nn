@@ -1,9 +1,16 @@
 [tool.poetry]
 name = "gnubg"
-version = "1.01"
+version = "1.1"
 description = "Python bindings for GNUBG neural evaluation"
 authors = ["David Reay <dr323090@falmouth.ac.uk>"]
-packages = []
+packages = [
+    { include = "gnubg", from = "." }
+]
+include = [
+    "gnubg/data/*.bd",
+    "gnubg/data/*.weights",
+    "gnubg/data/*.db"
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
@@ -15,3 +22,23 @@ twine = "^3.4.0"
 [build-system]
 requires = ["setuptools", "wheel",]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["gnubg"]
+
+[project]
+name = "gnubg"
+version = "1.1"
+description = "Python bindings for GNUBG neural evaluation"
+authors = [
+    { name = "David Reay", email = "dr323090@falmouth.ac.uk" }
+]
+dependencies = [
+    "setuptools>=80.4.0",
+    "wheel>=0.36.2"
+]
+readme = "README.md"
+keywords = ["GNUBG", "neural networks", "backgammon"]

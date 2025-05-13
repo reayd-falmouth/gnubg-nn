@@ -1,3 +1,0 @@
-include data/*.bd
-include data/*.weights
-include data/*.db
