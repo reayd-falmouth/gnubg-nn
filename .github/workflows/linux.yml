@@ -54,8 +54,9 @@ jobs:
         run: make build
 
       - name: Install the built package and run tests
-        working-directory: py
-        run: make test
+        run: |
+          cp py/test.py .
+          python test.py
 
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
