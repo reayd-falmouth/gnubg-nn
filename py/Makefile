@@ -5,7 +5,7 @@ clean:
 	rm -rf gnubg/gnubg.egg-info
 
 install:
-	pip install wheel
+	pip install --upgrade pip setuptools wheel cibuildwheel twine
 
 build:
 	python3 setup.py sdist bdist_wheel
