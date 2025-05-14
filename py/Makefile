@@ -11,6 +11,7 @@ build:
 	python3 setup.py sdist bdist_wheel
 
 test:
+	pip install dist/*.whl
 	cd tests && python3 test.py
 
 twine:
