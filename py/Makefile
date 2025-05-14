@@ -1,20 +1,14 @@
-all: clean build
+all: clean install build
 
 clean:
 	rm -rf build/ dist/ analyze/
 	rm -rf gnubg/gnubg.egg-info
 
+install:
+	pip install wheel
+
 build:
 	python3 setup.py sdist bdist_wheel
-
-install: clean
-	python3 setup.py install
-
-pip_uninstall:
-	pip uninstall gnubg
-
-pip_install:
-	pip install .
 
 test:
 	python3 test.py
