@@ -16,7 +16,7 @@ test:
 
 PYPI_REPO := testpypi
 twine:
-	twine upload --repository $(PYPI_REPO) dist/*
+	twine upload --verbose --repository $(PYPI_REPO) dist/*
 
 # Check-in code after formatting
 checkin: ## Perform a check-in after formatting the code
