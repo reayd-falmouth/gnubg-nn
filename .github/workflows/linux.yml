@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read    # so checkout still works
+  id-token: write   # ← this unlocks ACTIONS_ID_TOKEN_REQUEST_TOKEN
+
 jobs:
 
   py3mod:
@@ -65,7 +69,8 @@ jobs:
           name: gnubg-1.1-cp310-cp310-linux_x86_64
           path: py/dist/
 
-      - name: Upload to PyPI (optional)
-        if: github.event_name == 'push'
-        working-directory: py
+      - name: Upload to TestPyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
         run: make twine PYPI_REPO=testpypi
