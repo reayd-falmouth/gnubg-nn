@@ -54,9 +54,7 @@ jobs:
         run: make build
 
       - name: Install the built package and run tests
-        run: |
-          cp py/test.py .
-          python test.py
+        run: make test
 
       - name: Upload the dist directory as an artifact
         uses: actions/upload-artifact@v4
@@ -67,5 +65,4 @@ jobs:
       - name: Upload to PyPI (optional)
         if: github.event_name == 'push'
         working-directory: py
-        run: |
-          twine upload dist/*
+        run: make twine

@@ -11,7 +11,10 @@ build:
 	python3 setup.py sdist bdist_wheel
 
 test:
-	python3 test.py
+	cd tests && python3 test.py
+
+twine:
+	twine upload dist/*
 
 # Check-in code after formatting
 checkin: ## Perform a check-in after formatting the code
