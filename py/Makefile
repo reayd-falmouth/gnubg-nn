@@ -14,8 +14,9 @@ test:
 	pip install dist/*.whl
 	cd tests && python3 test.py
 
+PYPI_REPO := testpypi
 twine:
-	twine upload dist/*
+	twine upload --repository $(PYPI_REPO) dist/*
 
 # Check-in code after formatting
 checkin: ## Perform a check-in after formatting the code

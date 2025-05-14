@@ -12,6 +12,7 @@ on:
 jobs:
 
   py3mod:
+    environment: testpypi
     name: py3mod
     runs-on: ubuntu-latest
     steps:
@@ -67,4 +68,4 @@ jobs:
       - name: Upload to PyPI (optional)
         if: github.event_name == 'push'
         working-directory: py
-        run: make twine
+        run: make twine PYPI_REPO=testpypi
