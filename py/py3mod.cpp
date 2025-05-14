@@ -1770,12 +1770,24 @@ PyInit_gnubg(void)
     // Get the path to the GNUBG data directory
     Dl_info dl_info;
     dladdr((void*)PyInit_gnubg, &dl_info);
-    std::string base = dirname(strdup(dl_info.dli_fname));
+    // Determine where we shipped our data
+    std::string base    = dirname(strdup(dl_info.dli_fname));
     std::string datadir = base + "/data";
 
+    // If the user hasn't already pointed GNUBGHOME somewhere, default it
+    if (!std::getenv("GNUBGHOME")) {
+        // third argument “1” means “always overwrite”, but since getenv was null
+        // this just sets it for our process before Analyze::init()
+        setenv("GNUBGHOME", datadir.c_str(), 1);
+        //        std::cout << "Defaulting GNUBGHOME to: " << datadir << std::endl;
+    }
+    //    else {
+    //        std::cout << "GNUBGHOME set to: " << std::getenv("GNUBGHOME") << std::endl;
+    //    }
+
     // Debug: Print the base path and data directory
-    std::cout << "Base path: " << base << std::endl;
-    std::cout << "Data directory: " << datadir << std::endl;
+    //    std::cout << "Base path: " << base << std::endl;
+    //    std::cout << "Data directory: " << datadir << std::endl;
 
     // Define paths to required data files
     std::string weights = datadir + "/gnubg.weights";
@@ -1784,19 +1796,10 @@ PyInit_gnubg(void)
     std::string os0_bd  = datadir + "/gnubg_os0.bd";
 
     // Debug: Print the paths to the data files
-    std::cout << "Looking for weights at: " << weights << std::endl;
-    std::cout << "Looking for os_bd at: " << os_bd << std::endl;
-    std::cout << "Looking for ts0_bd at: " << ts0_bd << std::endl;
-    std::cout << "Looking for os0_bd at: " << os0_bd << std::endl;
-
-    // Check if GNUBGHOME is set, otherwise use the default data directory
-    const char* gnubghome = std::getenv("GNUBGHOME");
-    if (!gnubghome) {
-        gnubghome = base.c_str();
-    }
-
-    // Debug: Print the GNUBGHOME environment variable or fallback
-    std::cout << "GNUBGHOME is set to: " << gnubghome << std::endl;
+    //    std::cout << "Looking for weights at: " << weights << std::endl;
+    //    std::cout << "Looking for os_bd at: " << os_bd << std::endl;
+    //    std::cout << "Looking for ts0_bd at: " << ts0_bd << std::endl;
+    //    std::cout << "Looking for os0_bd at: " << os0_bd << std::endl;
 
     // Initialize GNUBG (loads all six nets into the global `nets[]`)
     if (!Analyze::init(weights.c_str())) {
