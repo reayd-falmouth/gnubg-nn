@@ -1,0 +1,84 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy_dev:
+    name: Deploy DEV
+    environment: dev
+    concurrency:
+      group: cdp-crm-data-sync-dev
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pipenv
+        run: pipx install poetry
+
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+          cache: 'poetry' # caching pipenv dependencies
+
+      - name: Install dependencies
+        run: poetry install
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Docker
+        run:
+          make docker ENVIRONMENT=dev
+
+      - name: SAM deploy
+        run:
+          make sam_deploy ENVIRONMENT=dev MONITORING_WEBHOOK_URL=${{ secrets.MONITORING_WEBHOOK_URL }}
+
+      - name: Update Secrets in AWS Secrets Manager
+        run:
+          make update_secrets ENVIRONMENT=dev
+
+      # Activate virtual environment and update DynamoDB config
+      - name: Update DDB Config
+        run: |
+          source $(poetry env info --path)/bin/activate
+          make update_ddb_config ENVIRONMENT=dev
+
+  integration_test:
+    environment: dev
+    needs: deploy_dev
+    name: Integration Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pipenv
+        run: pipx install poetry
+
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+          cache: 'poetry' # caching pipenv dependencies
+
+      - name: Install dependencies
+        run: poetry install
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      - name: Integration test
+        run:
+          make integration_test ENVIRONMENT=dev QUERY_OUTPUT_BUCKET=${{ secrets.QUERY_OUTPUT_BUCKET }}
