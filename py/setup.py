@@ -1,4 +1,4 @@
-# setup.py - clean Python 3 extension build for GNUBG neural net interface
+# setup.py - Python 3 extension build for GNUBG neural net interface
 
 from setuptools import setup, Extension, find_packages
 from glob import glob
