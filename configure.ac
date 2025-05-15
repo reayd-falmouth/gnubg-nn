@@ -2,14 +2,14 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_REVISION($Revision: 1.8 $)
-AC_INIT([gnubg-nn], [0.17], [bug-gnubg@gnu.org])
+AC_INIT([gnubg-nn],[0.17],[bug-gnubg@gnu.org])
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SRCDIR([py/pygnubg.cc])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_SRCDIR([py/py3mod.cpp])
+AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 
 AC_DISABLE_SHARED
-AC_PROG_LIBTOOL
+LT_INIT
 
 # Checks for programs.
 AC_PROG_CXX
@@ -17,7 +17,15 @@ AC_PROG_CC
 
 # Checks for header files.
 AC_FUNC_ALLOCA
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS([fcntl.h memory.h stdlib.h string.h strings.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -91,19 +99,19 @@ AC_ARG_VAR(SSE_CFLAGS, [CFLAGS needed for compiling in sse cpu support])
    
 dnl
 
-AX_PYTHON_DEFAULT()
-AX_PYTHON_WITH()
-AX_PYTHON_VERSION_ENSURE([2.2])
-AX_PYTHON_CSPEC
-AX_PYTHON_LSPEC
-if test "x$ax_python_cspec" == "x"; then
-	AC_MSG_ERROR("Needs python devel. Did you use either --with-python or --with-python=python2 ?");
-fi
+dnl AX_PYTHON_DEFAULT()
+dnl AX_PYTHON_WITH()
+dnl AX_PYTHON_VERSION_ENSURE([3.10])
+dnl AX_PYTHON_CSPEC
+dnl AX_PYTHON_LSPEC
+dnl if test "x$ax_python_cspec" == "x"; then
+dnl 	AC_MSG_ERROR("Python 3.10 or higher is required. Did you use --with-python=python3?");
+dnl fi
 
 AC_DEFINE(OS_BEAROFF_DB, 1, [osbdb])
 AC_DEFINE(LOADED_BO, 1, [lbo])
 AC_DEFINE(DOICC, 1, [doicc])
 AC_DEFINE(DEBUG, 1, [debug])
 
-AC_CONFIG_FILES([Makefile analyze/Makefile gnubg/Makefile gnubg/lib/Makefile py/Makefile sa/Makefile doc/Makefile scripts/Makefile m4/Makefile])
+AC_CONFIG_FILES([Makefile analyze/Makefile gnubg/Makefile gnubg/lib/Makefile sa/Makefile doc/Makefile scripts/Makefile m4/Makefile])
 AC_OUTPUT

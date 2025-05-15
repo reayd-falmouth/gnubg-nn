@@ -17,6 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _EVAL_H_
 #define _EVAL_H_
@@ -253,4 +256,7 @@ raceBGprob(CONST int anBoard[2][25], unsigned int side);
 
 #include "lib/sse.h"
 
+#endif
+#ifdef __cplusplus
+}
 #endif

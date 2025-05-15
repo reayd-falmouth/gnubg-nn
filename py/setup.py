@@ -1,0 +1,42 @@
+# setup.py - Python 3 extension build for GNUBG neural net interface
+
+from setuptools import setup, Extension, find_packages
+from glob import glob
+
+# Clean C++ and C interface files
+cpp_sources = [
+    "py3mod.cpp",
+    "../gnubg/bearoffgammon.cc",
+    "../gnubg/racebg.cc",
+    "../gnubg/osr.cc",
+]
+c_sources = glob("../gnubg/*.c") + glob("../gnubg/lib/*.c") + glob("../analyze/*.cc")
+
+# Define the extension module
+gnubg_module = Extension(
+    "gnubg.gnubg",
+    sources=cpp_sources + c_sources,
+    include_dirs=["../", "../gnubg", "../gnubg/lib", "../analyze", "../py"],
+    define_macros=[
+        ("LOADED_BO", "1"),
+        ("OS_BEAROFF_DB", "1"),
+    ],
+    extra_compile_args=["-std=c++11"],
+)
+
+# Setup declaration
+setup(
+    name="gnubg",
+    version="1.1",
+    packages=find_packages(),             # finds [ "gnubg" ]
+    ext_modules=[gnubg_module],
+    include_package_data=True,            # read MANIFEST.in for sdist
+    package_data={                        # include these in the wheel
+        'gnubg': ['data/*.bd',
+                  'data/*.weights',
+                  'data/*.db'],
+    },
+    description='Python3 bindings for GNUBG neural evaluation',
+    author='David Reay',
+    author_email='dr323090@falmouth.ac.uk',
+)

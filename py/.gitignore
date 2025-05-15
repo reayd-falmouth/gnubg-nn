@@ -3,5 +3,9 @@
 pygnubg
 *.pyc
 
-Makefile
+!Makefile
 Makefile.in
+build/
+gnubg.egg-info
+dist/
+analyze/

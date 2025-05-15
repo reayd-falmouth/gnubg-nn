@@ -41,6 +41,11 @@ using std::map;
 #include "analyze.h"
 #include "bm.h"
 
+#include <cstdio>
+#include <iostream>
+using std::cout;
+using std::endl;
+
 using std::min;
 
 static unsigned int const roll2dice1[21] =

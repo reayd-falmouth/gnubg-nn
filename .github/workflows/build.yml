@@ -1,0 +1,77 @@
+name: Build Linux
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read    # so checkout still works
+  id-token: write   # ← this unlocks ACTIONS_ID_TOKEN_REQUEST_TOKEN
+
+jobs:
+
+  py3mod:
+    environment: testpypi
+    name: py3mod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install deps
+        run: |
+          # Install essential build tools
+          sudo apt update
+          sudo apt install build-essential
+          
+          # Install autoconf and automake for generating the configure script
+          sudo apt install autoconf automake
+          
+          # Install pkg-config to find necessary libraries and headers
+          sudo apt install pkg-config
+          
+          # Install Python development headers (if using Python bindings)
+          sudo apt install python3-dev
+          
+          # Install additional libraries as needed (e.g., GTK, OpenSSL, zlib)
+          sudo apt install libgtk-3-dev libssl-dev zlib1g-dev
+          
+          # Regenerate the configure script and generate config.h
+          autoreconf -i
+          ./configure
+
+      - name: Set up python
+        uses: actions/setup-python@v4.4.0
+        with:
+          python-version-file: py/.python-version
+
+      - name: Install Python dependencies
+        working-directory: py
+        run: make install
+
+      - name: Build Python extension
+        working-directory: py
+        run: make build
+
+      - name: Install the built package and run tests
+        run: |
+          cd py
+          make test
+
+      - name: Upload the dist directory as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gnubg-1.1-cp310-cp310-linux_x86_64
+          path: py/dist/
+
+      - name: Upload to TestPyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+        working-directory: py
+        run: make twine PYPI_REPO=testpypi
